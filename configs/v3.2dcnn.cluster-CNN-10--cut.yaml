@@ -1,0 +1,56 @@
+# Cấu hình huấn luyện ResNet50 cho Action Classification
+
+# Thư mục chứa kết quả train (weights, logs, visualizations)
+output_dir: "/home/laptq/laptq-fs26-shoplifting-detection/outputs/train_results/classification/v3.2dcnn.cluster-CNN-10--cut"
+
+resume_path: null # Path tới thư mục run để resume (nếu có)
+
+# Thứ tự các class (Quan trọng: phải khớp với chỉ số khi lưu/load model)
+classes:
+  - "cho_tay_vao_tui_quan"
+  - "cho_tay_vao_tui_ao"
+  - "cho_tay_vao_tui_deo_tren_nguoi"
+  - "cho_tay_vao_tui_cam_tren_tay"
+  - "cho_tay_vao_tui_trong_gio_xe_hang"
+  - "cho_tay_vao_tui_sau_xe_hang"
+  - "cho_tay_vao_gio_xe_hang"
+  - "cho_tay_vao_ke"
+  - "tay_cam_san_pham"
+  - "tay_khong_cam_san_pham"
+
+# Dữ liệu tập Train: Mỗi class là một list các file .txt chứa đường dẫn ảnh
+train_data:
+  cho_tay_vao_tui_quan: ["/home/laptq/laptq-fs26-shoplifting-detection/outputs/train_data/classify_rgb/my_format/labels_actions--cluster-CNN-10--cut/cho_tay_vao_tui_quan/train--min4k--max5k.txt"]
+  cho_tay_vao_tui_ao: ["/home/laptq/laptq-fs26-shoplifting-detection/outputs/train_data/classify_rgb/my_format/labels_actions--cluster-CNN-10--cut/cho_tay_vao_tui_ao/train--min4k--max5k.txt"]
+  cho_tay_vao_tui_deo_tren_nguoi: ["/home/laptq/laptq-fs26-shoplifting-detection/outputs/train_data/classify_rgb/my_format/labels_actions--cluster-CNN-10--cut/cho_tay_vao_tui_deo_tren_nguoi/train--min4k--max5k.txt"]
+  cho_tay_vao_tui_cam_tren_tay: ["/home/laptq/laptq-fs26-shoplifting-detection/outputs/train_data/classify_rgb/my_format/labels_actions--cluster-CNN-10--cut/cho_tay_vao_tui_cam_tren_tay/train--min4k--max5k.txt"]
+  cho_tay_vao_tui_trong_gio_xe_hang: ["/home/laptq/laptq-fs26-shoplifting-detection/outputs/train_data/classify_rgb/my_format/labels_actions--cluster-CNN-10--cut/cho_tay_vao_tui_trong_gio_xe_hang/train--min4k--max5k.txt"]
+  cho_tay_vao_tui_sau_xe_hang: ["/home/laptq/laptq-fs26-shoplifting-detection/outputs/train_data/classify_rgb/my_format/labels_actions--cluster-CNN-10--cut/cho_tay_vao_tui_sau_xe_hang/train--min4k--max5k.txt"]
+  cho_tay_vao_gio_xe_hang: ["/home/laptq/laptq-fs26-shoplifting-detection/outputs/train_data/classify_rgb/my_format/labels_actions--cluster-CNN-10--cut/cho_tay_vao_gio_xe_hang/train--min4k--max5k.txt"]
+  cho_tay_vao_ke: ["/home/laptq/laptq-fs26-shoplifting-detection/outputs/train_data/classify_rgb/my_format/labels_actions--cluster-CNN-10--cut/cho_tay_vao_ke/train--min4k--max5k.txt"]
+  tay_cam_san_pham: ["/home/laptq/laptq-fs26-shoplifting-detection/outputs/train_data/classify_rgb/my_format/labels_actions--cluster-CNN-10--cut/tay_cam_san_pham/train--min4k--max5k.txt"]
+  tay_khong_cam_san_pham: ["/home/laptq/laptq-fs26-shoplifting-detection/outputs/train_data/classify_rgb/my_format/labels_actions--cluster-CNN-10--cut/tay_khong_cam_san_pham/train--min4k--max5k.txt"]
+
+# Dữ liệu tập Val/Test
+val_data:
+  cho_tay_vao_tui_quan: ["/home/laptq/laptq-fs26-shoplifting-detection/outputs/train_data/classify_rgb/my_format/labels_actions--cluster-CNN-10--cut/cho_tay_vao_tui_quan/val--min4k--max5k.txt"]
+  cho_tay_vao_tui_ao: ["/home/laptq/laptq-fs26-shoplifting-detection/outputs/train_data/classify_rgb/my_format/labels_actions--cluster-CNN-10--cut/cho_tay_vao_tui_ao/val--min4k--max5k.txt"]
+  cho_tay_vao_tui_deo_tren_nguoi: ["/home/laptq/laptq-fs26-shoplifting-detection/outputs/train_data/classify_rgb/my_format/labels_actions--cluster-CNN-10--cut/cho_tay_vao_tui_deo_tren_nguoi/val--min4k--max5k.txt"]
+  cho_tay_vao_tui_cam_tren_tay: ["/home/laptq/laptq-fs26-shoplifting-detection/outputs/train_data/classify_rgb/my_format/labels_actions--cluster-CNN-10--cut/cho_tay_vao_tui_cam_tren_tay/val--min4k--max5k.txt"]
+  cho_tay_vao_tui_trong_gio_xe_hang: ["/home/laptq/laptq-fs26-shoplifting-detection/outputs/train_data/classify_rgb/my_format/labels_actions--cluster-CNN-10--cut/cho_tay_vao_tui_trong_gio_xe_hang/val--min4k--max5k.txt"]
+  cho_tay_vao_tui_sau_xe_hang: ["/home/laptq/laptq-fs26-shoplifting-detection/outputs/train_data/classify_rgb/my_format/labels_actions--cluster-CNN-10--cut/cho_tay_vao_tui_sau_xe_hang/val--min4k--max5k.txt"]
+  cho_tay_vao_gio_xe_hang: ["/home/laptq/laptq-fs26-shoplifting-detection/outputs/train_data/classify_rgb/my_format/labels_actions--cluster-CNN-10--cut/cho_tay_vao_gio_xe_hang/val--min4k--max5k.txt"]
+  cho_tay_vao_ke: ["/home/laptq/laptq-fs26-shoplifting-detection/outputs/train_data/classify_rgb/my_format/labels_actions--cluster-CNN-10--cut/cho_tay_vao_ke/val--min4k--max5k.txt"]
+  tay_cam_san_pham: ["/home/laptq/laptq-fs26-shoplifting-detection/outputs/train_data/classify_rgb/my_format/labels_actions--cluster-CNN-10--cut/tay_cam_san_pham/val--min4k--max5k.txt"]
+  tay_khong_cam_san_pham: ["/home/laptq/laptq-fs26-shoplifting-detection/outputs/train_data/classify_rgb/my_format/labels_actions--cluster-CNN-10--cut/tay_khong_cam_san_pham/val--min4k--max5k.txt"]
+
+# Tham số Training
+epochs: 100
+batch_size: 32
+lr: 1e-4
+weight_decay: 0.0005
+patience: 30
+num_workers: 4
+precision: 32 # Có thể dùng 16 hoặc 32
+
+device: 1 # "cpu", 0, 1, ...
