@@ -36,6 +36,7 @@ def evaluate_model(ckpt_path: str) -> None:
 
     # 3. Load Model
     model = ActionResNet50.load_from_checkpoint(ckpt_path)
+    model.class_names = cfg["classes"]
 
     # 4. Trainer
     trainer = pl.Trainer(

@@ -1,10 +1,15 @@
 from typing import Dict, List, Optional, Tuple, Union, Any
+import os
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import pytorch_lightning as pl
 from torchvision import models
 import torchmetrics
+from torchmetrics.classification import MulticlassConfusionMatrix
 
 
 class ActionResNet50(pl.LightningModule):
@@ -26,6 +31,9 @@ class ActionResNet50(pl.LightningModule):
             task="multiclass", num_classes=num_classes
         )
         self.val_acc = torchmetrics.Accuracy(task="multiclass", num_classes=num_classes)
+        self.test_acc = torchmetrics.Accuracy(task="multiclass", num_classes=num_classes)
+        self.test_cm = MulticlassConfusionMatrix(num_classes=num_classes)
+        self.class_names = None
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         return self.model(x)
@@ -76,9 +84,39 @@ class ActionResNet50(pl.LightningModule):
         x, y, _ = batch
         logits = self(x)
         loss = F.cross_entropy(logits, y)
-        self.val_acc(logits, y)
+        self.test_acc(logits, y)
+        self.test_cm.update(logits, y)
         self.log("test_loss", loss, on_epoch=True, batch_size=x.shape[0])
-        self.log("test_acc", self.val_acc, on_epoch=True, batch_size=x.shape[0])
+        self.log("test_acc", self.test_acc, on_epoch=True, batch_size=x.shape[0])
+
+    def on_test_epoch_end(self) -> None:
+        cm = self.test_cm.compute()
+        self.test_cm.reset()
+
+        # Normalize by row (Actual class)
+        cm_sum = cm.sum(dim=1, keepdim=True)
+        cm_norm = cm.float() / (cm_sum + 1e-7)
+        cm_norm = cm_norm.cpu().numpy()
+
+        plt.figure(figsize=(12, 10))
+        sns.heatmap(
+            cm_norm,
+            annot=True,
+            fmt=".2f",
+            cmap="Blues",
+            xticklabels=self.class_names if self.class_names else "auto",
+            yticklabels=self.class_names if self.class_names else "auto",
+        )
+        plt.xticks(rotation=45, ha="right")
+        plt.yticks(rotation=0)
+        plt.xlabel("Predicted")
+        plt.ylabel("Actual")
+        plt.title("Normalized Confusion Matrix")
+
+        save_path = os.path.join(self.trainer.default_root_dir, "confusion_matrix.png")
+        plt.savefig(save_path, bbox_inches="tight")
+        print(f"\n[INFO] Normalized confusion matrix saved to: {save_path}")
+        plt.close()
 
     def configure_optimizers(self) -> Dict[str, Any]:
         optimizer = torch.optim.AdamW(
