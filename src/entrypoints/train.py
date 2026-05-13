@@ -10,8 +10,8 @@ from pytorch_lightning.callbacks import (
 )
 from pytorch_lightning.loggers import CSVLogger
 
-from src.core.model import ActionResNet50
-from src.core.data import ActionDataModule
+from src.core.model import ClassifyModel
+from src.core.data import ClassifyDataModule
 from src.core.utils import get_run_dir, visualize_batch
 
 # ================= CẤU HÌNH TRỰC TIẾP =================
@@ -52,7 +52,7 @@ def train_model(config_path: str) -> None:
     print(f"Output directory: {run_dir}")
 
     # 3. Data Module
-    dm = ActionDataModule(
+    dm = ClassifyDataModule(
         train_cfg=cfg["train_data"],
         val_cfg=cfg["val_data"],
         classes=cfg["classes"],
@@ -84,7 +84,7 @@ def train_model(config_path: str) -> None:
         )
 
     # 4. Model
-    model = ActionResNet50(
+    model = ClassifyModel(
         num_classes=len(cfg["classes"]),
         lr=float(cfg["lr"]),
         weight_decay=float(cfg.get("weight_decay", 1e-5)),

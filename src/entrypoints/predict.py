@@ -4,7 +4,7 @@ from typing import List, Tuple, Any
 import torch
 from PIL import Image
 import torchvision.transforms as T
-from src.core.model import ActionResNet50
+from src.core.model import ClassifyModel
 from src.core.augmentations import SquarePad
 
 # ================= CẤU HÌNH TRỰC TIẾP =================
@@ -29,7 +29,7 @@ def predict_model(ckpt_path: str, input_path: str, output_path: str) -> None:
         cfg = yaml.safe_load(f)
 
     classes = cfg["classes"]
-    model = ActionResNet50.load_from_checkpoint(ckpt_path).to(device)
+    model = ClassifyModel.load_from_checkpoint(ckpt_path).to(device)
     model.eval()
 
     # 3. Transform

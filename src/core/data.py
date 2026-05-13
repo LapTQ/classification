@@ -64,7 +64,7 @@ class ActionDataset(Dataset):
         return img, label, img_path
 
 
-class ActionDataModule(pl.LightningDataModule):
+class ClassifyDataModule(pl.LightningDataModule):
     def __init__(
         self,
         train_cfg: Dict[str, Any],

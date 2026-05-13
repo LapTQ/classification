@@ -12,7 +12,7 @@ import torchmetrics
 from torchmetrics.classification import MulticlassConfusionMatrix
 
 
-class ActionResNet50(pl.LightningModule):
+class ClassifyModel(pl.LightningModule):
     def __init__(
         self, num_classes: int, lr: float = 1e-4, weight_decay: float = 1e-5
     ) -> None:
@@ -31,7 +31,9 @@ class ActionResNet50(pl.LightningModule):
             task="multiclass", num_classes=num_classes
         )
         self.val_acc = torchmetrics.Accuracy(task="multiclass", num_classes=num_classes)
-        self.test_acc = torchmetrics.Accuracy(task="multiclass", num_classes=num_classes)
+        self.test_acc = torchmetrics.Accuracy(
+            task="multiclass", num_classes=num_classes
+        )
         self.test_cm = MulticlassConfusionMatrix(num_classes=num_classes)
         self.class_names = None
 
