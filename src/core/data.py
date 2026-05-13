@@ -84,7 +84,7 @@ class ActionDataModule(pl.LightningDataModule):
             [
                 SquarePad(),
                 T.RandomHorizontalFlip(),
-                T.RandAugment(num_ops=4, interpolation=T.InterpolationMode.BILINEAR),
+                T.RandAugment(num_ops=4, magnitude=9, interpolation=T.InterpolationMode.BILINEAR),
                 Downscale((0.5, 0.5), p=0.1),
                 ChannelShuffle(p=0.5),
                 GaussNoise(p=0.1),

@@ -1,7 +1,7 @@
 # Cấu hình huấn luyện ResNet50 cho Action Classification
 
 # Thư mục chứa kết quả train (weights, logs, visualizations)
-output_dir: "/home/laptq/laptq-fs26-shoplifting-detection/outputs/train_results/classification/v1.2dcnn.cluster-CNN-10"
+output_dir: "/home/laptq/laptq-fs26-shoplifting-detection/runs/classification/fs26/v1.2dcnn.cluster-CNN-10"
 
 resume_path: null # Path tới thư mục run để resume (nếu có)
 
