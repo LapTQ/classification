@@ -40,7 +40,7 @@ class ActionDataset(Dataset):
                     paths = [line.strip() for line in f if line.strip()]
                     self.image_paths.extend(paths)
                     self.labels.extend([idx] * len(paths))
-        
+
         idxs = list(range(len(self.image_paths)))
         random.seed(42)
         random.shuffle(idxs)
@@ -84,7 +84,9 @@ class ActionDataModule(pl.LightningDataModule):
             [
                 SquarePad(),
                 T.RandomHorizontalFlip(),
-                T.RandAugment(num_ops=4, magnitude=9, interpolation=T.InterpolationMode.BILINEAR),
+                T.RandAugment(
+                    num_ops=4, magnitude=9, interpolation=T.InterpolationMode.BILINEAR
+                ),
                 Downscale((0.5, 0.5), p=0.1),
                 ChannelShuffle(p=0.5),
                 GaussNoise(p=0.1),
@@ -112,8 +114,12 @@ class ActionDataModule(pl.LightningDataModule):
                 self.train_cfg, self.classes, self.train_transform
             )
             self.val_ds = ActionDataset(self.val_cfg, self.classes, self.val_transform)
-        if stage == "test" or stage == "predict":
+        if stage == "test":
             self.test_ds = ActionDataset(self.val_cfg, self.classes, self.val_transform)
+        if stage == "predict":
+            self.predict_ds = ActionDataset(
+                self.val_cfg, self.classes, self.val_transform
+            )
 
     def train_dataloader(self) -> DataLoader:
         return DataLoader(
@@ -143,7 +149,7 @@ class ActionDataModule(pl.LightningDataModule):
 
     def predict_dataloader(self):
         return DataLoader(
-            self.test_ds,
+            self.predict_ds,
             batch_size=self.batch_size,
             shuffle=False,
             num_workers=self.num_workers,

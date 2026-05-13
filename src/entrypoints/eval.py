@@ -7,12 +7,11 @@ from src.core.model import ActionResNet50
 from src.core.data import ActionDataModule
 
 # ================= CẤU HÌNH TRỰC TIẾP =================
-CKPT_PATH = "/home/laptq/laptq-fs26-shoplifting-detection/outputs/train_classification/train_20260506_165019/weights/best-epoch=01-val_acc=0.280.ckpt"
-DEVICE = 0
+CKPT_PATH = "/home/laptq/laptq-fs26-shoplifting-detection/runs/classification/fs26/v3.2dcnn.cluster-CNN-10--cut-l4/weights/best-epoch=02-val_acc=0.333.ckpt"
 # =====================================================
 
 
-def evaluate_model(ckpt_path: str, device: Union[int, str]) -> None:
+def evaluate_model(ckpt_path: str) -> None:
     # 1. Load Config (tìm config.yaml ở thư mục cha của checkpoint)
     run_dir = os.path.dirname(os.path.dirname(ckpt_path))
     config_file = os.path.join(run_dir, "config.yaml")
@@ -22,6 +21,9 @@ def evaluate_model(ckpt_path: str, device: Union[int, str]) -> None:
 
     with open(config_file, "r", encoding="utf-8") as f:
         cfg = yaml.safe_load(f)
+
+    accelerator = cfg["accelerator"]
+    devices = cfg["devices"]
 
     # 2. Data Module
     dm = ActionDataModule(
@@ -36,13 +38,6 @@ def evaluate_model(ckpt_path: str, device: Union[int, str]) -> None:
     model = ActionResNet50.load_from_checkpoint(ckpt_path)
 
     # 4. Trainer
-    if device == "cpu":
-        accelerator = "cpu"
-        devices = "auto"
-    else:
-        accelerator = "gpu"
-        devices = [device]
-
     trainer = pl.Trainer(
         accelerator=accelerator,
         devices=devices,
@@ -55,4 +50,4 @@ def evaluate_model(ckpt_path: str, device: Union[int, str]) -> None:
 
 
 if __name__ == "__main__":
-    evaluate_model(CKPT_PATH, DEVICE)
+    evaluate_model(CKPT_PATH)

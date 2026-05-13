@@ -27,8 +27,9 @@ def train_model(config_path: str) -> None:
     with open(config_path, "r", encoding="utf-8") as f:
         cfg = yaml.safe_load(f)
 
-    resume_path = cfg.get("resume_path")
-    device = cfg.get("device", "auto")
+    resume_path = cfg["resume_path"]
+    accelerator = cfg["accelerator"]
+    devices = cfg["devices"]
 
     # 2. Setup Run Directory & Load Actual Config (if resume)
     if resume_path:
@@ -38,9 +39,10 @@ def train_model(config_path: str) -> None:
         if os.path.exists(config_file):
             with open(config_file, "r", encoding="utf-8") as f:
                 cfg = yaml.safe_load(f)
-            # Re-apply device from the command/main config if needed, 
+            # Re-apply device from the command/main config if needed,
             # or keep it from resume config. Usually device is environmental.
-            cfg["device"] = device 
+            cfg["devices"] = devices
+            cfg["accelerator"] = accelerator
     else:
         run_dir = get_run_dir(cfg["output_dir"])
         # Lưu lại config để phục vụ resume sau này
@@ -102,14 +104,6 @@ def train_model(config_path: str) -> None:
     ]
 
     # 5. Trainer
-    # Xử lý device logic
-    if device == "cpu":
-        accelerator = "cpu"
-        devices = "auto"
-    else:
-        accelerator = "gpu"
-        devices = [device]
-
     trainer = pl.Trainer(
         max_epochs=cfg["epochs"],
         accelerator=accelerator,
