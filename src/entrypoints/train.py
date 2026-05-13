@@ -15,7 +15,7 @@ from src.core.data import ClassifyDataModule
 from src.core.utils import get_run_dir, visualize_batch
 
 # ================= CẤU HÌNH TRỰC TIẾP =================
-CONFIG_PATH = "configs/v3.2dcnn.cluster-CNN-10--cut.yaml"  # Path tới file cấu hình
+CONFIG_PATH = "configs/v4.2dcnn.cluster-CNN-8--cut-l4.yaml"  # Path tới file cấu hình
 # =====================================================
 
 
@@ -57,7 +57,7 @@ def train_model(config_path: str) -> None:
         val_cfg=cfg["val_data"],
         classes=cfg["classes"],
         batch_size=cfg["batch_size"],
-        num_workers=cfg.get("num_workers", 4),
+        num_workers=cfg["num_workers"],
     )
     dm.setup(stage="fit")
 
@@ -87,7 +87,7 @@ def train_model(config_path: str) -> None:
     model = ClassifyModel(
         num_classes=len(cfg["classes"]),
         lr=float(cfg["lr"]),
-        weight_decay=float(cfg.get("weight_decay", 1e-5)),
+        weight_decay=float(cfg["weight_decay"]),
     )
 
     # 5. Callbacks & Loggers
@@ -110,12 +110,12 @@ def train_model(config_path: str) -> None:
         devices=devices,
         callbacks=[
             checkpoint_callback,
-            EarlyStopping(monitor="val_loss", patience=cfg.get("patience", 10)),
+            EarlyStopping(monitor="val_acc", mode="max", patience=cfg["patience"]),
             LearningRateMonitor(logging_interval="epoch"),
         ],
         logger=loggers,
         default_root_dir=run_dir,
-        precision=cfg.get("precision", 32),
+        precision=cfg["precision"],
     )
 
     # 6. Fit
