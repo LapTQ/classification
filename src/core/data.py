@@ -89,7 +89,7 @@ class ClassifyDataModule(pl.LightningDataModule):
                 ),
                 Downscale((0.5, 0.5), p=0.1),
                 ChannelShuffle(p=0.5),
-                GaussNoise(p=0.1),
+                # GaussNoise(p=0.1),
                 T.ColorJitter(hue=0.15),
                 T.RandomGrayscale(p=0.1),
                 # T.Resize((224, 224)),
