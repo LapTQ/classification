@@ -19,11 +19,16 @@ class ClassifyModel(pl.LightningModule):
         super().__init__()
         self.save_hyperparameters()
 
-        self.model = models.efficientnet_v2_s(
-            weights=models.EfficientNet_V2_S_Weights.DEFAULT
+        # self.model = models.efficientnet_v2_s(
+        #     weights=models.EfficientNet_V2_S_Weights.DEFAULT
+        # )
+        # in_features = self.model.classifier[1].in_features
+        # self.model.classifier[1] = nn.Linear(in_features, num_classes)
+        self.model = models.vit_b_16(
+            weights=models.ViT_B_16_Weights.DEFAULT
         )
-        in_features = self.model.classifier[1].in_features
-        self.model.classifier[1] = nn.Linear(in_features, num_classes)
+        in_features = self.model.heads.head.in_features
+        self.model.heads.head = nn.Linear(in_features, num_classes)
 
         self.loss_fn = nn.CrossEntropyLoss()
 

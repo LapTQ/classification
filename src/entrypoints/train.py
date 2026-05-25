@@ -15,7 +15,7 @@ from src.core.data import ClassifyDataModule
 from src.core.utils import get_run_dir, visualize_batch
 
 # ================= CẤU HÌNH TRỰC TIẾP =================
-CONFIG_PATH = "configs/v13.2dcnn.cluster-CNN-8--cut-l4+gen-hoangvt-thaovt-20260520.yaml"  # Path tới file cấu hình
+CONFIG_PATH = "configs/v14.2dcnn-vit.cluster-CNN-8--cut-l4.yaml"  # Path tới file cấu hình
 # =====================================================
 
 

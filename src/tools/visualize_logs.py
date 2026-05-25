@@ -77,6 +77,6 @@ def visualize_training(run_dir: str):
 
 if __name__ == "__main__":
     # Dán đường dẫn thư mục run của bạn vào đây
-    RUN_DIR = "/home/laptq/laptq-fs26-shoplifting-detection/runs/classification/fs26/v12.2dcnn.cluster-CNN-8--cut-l4+gen-cuongdh-action-20260522"
+    RUN_DIR = "/home/laptq/laptq-fs26-shoplifting-detection/runs/classification/fs26/v13.2dcnn.cluster-CNN-8--cut-l4+gen-hoangvt-thaovt-20260520"
     
     visualize_training(RUN_DIR)
