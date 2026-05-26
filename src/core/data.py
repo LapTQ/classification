@@ -116,10 +116,6 @@ class ClassifyDataModule(pl.LightningDataModule):
             self.val_ds = ActionDataset(self.val_cfg, self.classes, self.val_transform)
         if stage == "test":
             self.test_ds = ActionDataset(self.val_cfg, self.classes, self.val_transform)
-        if stage == "predict":
-            self.predict_ds = ActionDataset(
-                self.val_cfg, self.classes, self.val_transform
-            )
 
     def train_dataloader(self) -> DataLoader:
         return DataLoader(
@@ -142,14 +138,6 @@ class ClassifyDataModule(pl.LightningDataModule):
     def test_dataloader(self) -> DataLoader:
         return DataLoader(
             self.test_ds,
-            batch_size=self.batch_size,
-            shuffle=False,
-            num_workers=self.num_workers,
-        )
-
-    def predict_dataloader(self):
-        return DataLoader(
-            self.predict_ds,
             batch_size=self.batch_size,
             shuffle=False,
             num_workers=self.num_workers,
