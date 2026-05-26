@@ -7,7 +7,7 @@ from src.core.model import ClassifyModel
 from src.core.data import ClassifyDataModule
 
 # ================= CẤU HÌNH TRỰC TIẾP =================
-CKPT_PATH = "/home/laptq/laptq-fs26-shoplifting-detection/runs/classification/fs26/v13.2dcnn.cluster-CNN-8--cut-l4+gen-hoangvt-thaovt-20260520/weights/best-epoch=18-val_acc=0.377.ckpt"
+CKPT_PATH = "/home/laptq/laptq-fs26-shoplifting-detection/runs/classification/fs26/v14.2dcnn-vit.cluster-CNN-8--cut-l4/weights/best-epoch=02-val_acc=0.403.ckpt"
 # =====================================================
 
 

@@ -1,15 +1,16 @@
-from typing import Dict, List, Optional, Tuple, Union, Any
 import os
-import numpy as np
+from typing import Any, Dict, List, Optional, Tuple, Union
+
 import matplotlib.pyplot as plt
+import numpy as np
+import pytorch_lightning as pl
 import seaborn as sns
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import pytorch_lightning as pl
-from torchvision import models
 import torchmetrics
 from torchmetrics.classification import MulticlassConfusionMatrix
+from torchvision import models
 
 
 class ClassifyModel(pl.LightningModule):
@@ -19,16 +20,16 @@ class ClassifyModel(pl.LightningModule):
         super().__init__()
         self.save_hyperparameters()
 
-        # self.model = models.efficientnet_v2_s(
-        #     weights=models.EfficientNet_V2_S_Weights.DEFAULT
-        # )
-        # in_features = self.model.classifier[1].in_features
-        # self.model.classifier[1] = nn.Linear(in_features, num_classes)
-        self.model = models.vit_b_16(
-            weights=models.ViT_B_16_Weights.DEFAULT
+        self.model = models.efficientnet_v2_s(
+            weights=models.EfficientNet_V2_S_Weights.DEFAULT
         )
-        in_features = self.model.heads.head.in_features
-        self.model.heads.head = nn.Linear(in_features, num_classes)
+        in_features = self.model.classifier[1].in_features
+        self.model.classifier[1] = nn.Linear(in_features, num_classes)
+        # self.model = models.vit_b_16(
+        #     weights=models.ViT_B_16_Weights.DEFAULT
+        # )
+        # in_features = self.model.heads.head.in_features
+        # self.model.heads.head = nn.Linear(in_features, num_classes)
 
         self.loss_fn = nn.CrossEntropyLoss()
 
