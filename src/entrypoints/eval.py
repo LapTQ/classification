@@ -5,9 +5,10 @@ import torch
 import pytorch_lightning as pl
 from src.core.model import ClassifyModel
 from src.core.data import ClassifyDataModule
+from src.entrypoints.bootstrap import create_backbone, create_transform
 
 # ================= CẤU HÌNH TRỰC TIẾP =================
-CKPT_PATH = "/home/laptq/laptq-fs26-shoplifting-detection/runs/classification/fs26/v14.2dcnn-vit.cluster-CNN-8--cut-l4/weights/best-epoch=02-val_acc=0.403.ckpt"
+CKPT_PATH = "/home/laptq/laptq-fs26-shoplifting-detection/runs/classification/fs26/v1.2dcnn.cluster-CNN-10/weights/best-epoch=00-val_acc=0.304.ckpt"
 # =====================================================
 
 
@@ -26,16 +27,20 @@ def evaluate_model(ckpt_path: str) -> None:
     devices = cfg["devices"]
 
     # 2. Data Module
+    val_transform = create_transform(cfg["val_augment"])
+
     dm = ClassifyDataModule(
         train_cfg={},
         val_cfg=cfg["val_data"],
         classes=cfg["classes"],
+        val_transform=val_transform,
         batch_size=cfg["batch_size"],
-        num_workers=cfg.get("num_workers", 4),
+        num_workers=cfg["num_workers"],
     )
 
     # 3. Load Model
-    model = ClassifyModel.load_from_checkpoint(ckpt_path)
+    backbone = create_backbone(cfg)
+    model = ClassifyModel.load_from_checkpoint(ckpt_path, model=backbone)
     model.class_names = cfg["classes"]
 
     # 4. Trainer

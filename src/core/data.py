@@ -70,6 +70,8 @@ class ClassifyDataModule(pl.LightningDataModule):
         train_cfg: Dict[str, Any],
         val_cfg: Dict[str, Any],
         classes: List[str],
+        train_transform: Optional[T.Compose] = None,
+        val_transform: Optional[T.Compose] = None,
         batch_size: int = 32,
         num_workers: int = 4,
     ) -> None:
@@ -77,36 +79,10 @@ class ClassifyDataModule(pl.LightningDataModule):
         self.train_cfg = train_cfg
         self.val_cfg = val_cfg
         self.classes = classes
+        self.train_transform = train_transform
+        self.val_transform = val_transform
         self.batch_size = batch_size
         self.num_workers = num_workers
-
-        self.train_transform = T.Compose(
-            [
-                SquarePad(),
-                T.RandomHorizontalFlip(),
-                T.RandAugment(
-                    num_ops=4, magnitude=9, interpolation=T.InterpolationMode.BILINEAR
-                ),
-                Downscale((0.5, 0.5), p=0.1),
-                ChannelShuffle(p=0.5),
-                # GaussNoise(p=0.1),
-                T.ColorJitter(hue=0.15),
-                T.RandomGrayscale(p=0.1),
-                # T.Resize((224, 224)),
-                T.RandomResizedCrop((224, 224), scale=(0.7, 1.0)),
-                T.ToTensor(),
-                T.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
-            ]
-        )
-
-        self.val_transform = T.Compose(
-            [
-                SquarePad(),
-                T.Resize((224, 224)),
-                T.ToTensor(),
-                T.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
-            ]
-        )
 
     def setup(self, stage: Optional[str] = None) -> None:
         if stage == "fit" or stage is None:

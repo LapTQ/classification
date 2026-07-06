@@ -5,7 +5,7 @@ import torch
 from PIL import Image
 import torchvision.transforms as T
 from src.core.model import ClassifyModel
-from src.core.augmentations import SquarePad
+from src.entrypoints.bootstrap import create_backbone, create_transform
 from tqdm import tqdm
 
 # ================= CẤU HÌNH TRỰC TIẾP =================
@@ -38,18 +38,12 @@ def predict_model(ckpt_path: str, input_paths: List[str], output_path: str, devi
         cfg = yaml.safe_load(f)
 
     classes = cfg["classes"]
-    model = ClassifyModel.load_from_checkpoint(ckpt_path).to(device)
+    backbone = create_backbone(cfg)
+    model = ClassifyModel.load_from_checkpoint(ckpt_path, model=backbone).to(device)
     model.eval()
 
     # 3. Transform
-    transform = T.Compose(
-        [
-            SquarePad(),
-            T.Resize((224, 224)),
-            T.ToTensor(),
-            T.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
-        ]
-    )
+    transform = create_transform(cfg["val_augment"])
 
     # 4. Collect Images
     image_paths = []

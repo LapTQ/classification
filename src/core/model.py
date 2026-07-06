@@ -15,21 +15,16 @@ from torchvision import models
 
 class ClassifyModel(pl.LightningModule):
     def __init__(
-        self, num_classes: int, lr: float = 1e-4, weight_decay: float = 1e-5
+        self,
+        model: nn.Module,
+        num_classes: int,
+        lr: float = 1e-4,
+        weight_decay: float = 1e-5,
+        class_names: Optional[List[str]] = None,
     ) -> None:
         super().__init__()
-        self.save_hyperparameters()
-
-        self.model = models.efficientnet_v2_s(
-            weights=models.EfficientNet_V2_S_Weights.DEFAULT
-        )
-        in_features = self.model.classifier[1].in_features
-        self.model.classifier[1] = nn.Linear(in_features, num_classes)
-        # self.model = models.vit_b_16(
-        #     weights=models.ViT_B_16_Weights.DEFAULT
-        # )
-        # in_features = self.model.heads.head.in_features
-        # self.model.heads.head = nn.Linear(in_features, num_classes)
+        self.save_hyperparameters(ignore=["model"])
+        self.model = model
 
         self.loss_fn = nn.CrossEntropyLoss()
 
@@ -41,7 +36,7 @@ class ClassifyModel(pl.LightningModule):
             task="multiclass", num_classes=num_classes
         )
         self.test_cm = MulticlassConfusionMatrix(num_classes=num_classes)
-        self.class_names = None
+        self.class_names = class_names
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         return self.model(x)

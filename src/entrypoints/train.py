@@ -13,9 +13,10 @@ from pytorch_lightning.loggers import CSVLogger
 from src.core.model import ClassifyModel
 from src.core.data import ClassifyDataModule
 from src.core.utils import get_run_dir, visualize_batch
+from src.entrypoints.bootstrap import create_backbone, create_transform
 
 # ================= CẤU HÌNH TRỰC TIẾP =================
-CONFIG_PATH = "configs/v17.2dcnn.cluster-CNN-8--cut-l4.adamax.yaml"  # Path tới file cấu hình
+CONFIG_PATH = "configs/v18.2dcnn.cluster-CNN-8--cut-l4.higher-lr.yaml"  # Path tới file cấu hình
 # =====================================================
 
 
@@ -52,10 +53,15 @@ def train_model(config_path: str) -> None:
     print(f"Output directory: {run_dir}")
 
     # 3. Data Module
+    train_transform = create_transform(cfg["train_augment"])
+    val_transform = create_transform(cfg["val_augment"])
+
     dm = ClassifyDataModule(
         train_cfg=cfg["train_data"],
         val_cfg=cfg["val_data"],
         classes=cfg["classes"],
+        train_transform=train_transform,
+        val_transform=val_transform,
         batch_size=cfg["batch_size"],
         num_workers=cfg["num_workers"],
     )
@@ -84,7 +90,9 @@ def train_model(config_path: str) -> None:
         )
 
     # 4. Model
+    backbone = create_backbone(cfg)
     model = ClassifyModel(
+        model=backbone,
         num_classes=len(cfg["classes"]),
         lr=float(cfg["lr"]),
         weight_decay=float(cfg["weight_decay"]),

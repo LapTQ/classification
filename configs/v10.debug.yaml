@@ -49,3 +49,42 @@ precision: 32 # Có thể dùng 16 hoặc 32
 
 accelerator: "gpu" # "cpu", "gpu"
 devices: [2, 3, 4, 5] # "auto", 0, 1, ...
+
+model: "efficientnetv2s"
+
+train_augment:
+  - SquarePad: {}
+  - RandomHorizontalFlip: {}
+  - RandAugment:
+      num_ops: 4
+      magnitude: 9
+      interpolation: "BILINEAR"
+  - Downscale:
+      scale_range: [0.5, 0.5]
+      p: 0.1
+  - ChannelShuffle:
+      p: 0.5
+  # - GaussNoise:
+  #     p: 0.1
+  - ColorJitter:
+      hue: 0.15
+  - RandomGrayscale:
+      p: 0.1
+  # - Resize:
+  #     size: [224, 224]
+  - RandomResizedCrop:
+      size: [224, 224]
+      scale: [0.7, 1.0]
+  - ToTensor: {}
+  - Normalize:
+      mean: [0.485, 0.456, 0.406]
+      std: [0.229, 0.224, 0.225]
+
+val_augment:
+  - SquarePad: {}
+  - Resize:
+      size: [224, 224]
+  - ToTensor: {}
+  - Normalize:
+      mean: [0.485, 0.456, 0.406]
+      std: [0.229, 0.224, 0.225]
