@@ -177,4 +177,5 @@ cython_debug/
 .venv
 data
 outputs
-externals/
+externals
+models
