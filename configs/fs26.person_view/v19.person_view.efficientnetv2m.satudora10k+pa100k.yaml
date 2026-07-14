@@ -1,0 +1,90 @@
+# Cấu hình huấn luyện ResNet50 cho Action Classification
+
+# Thư mục chứa kết quả train (weights, logs, visualizations)
+output_dir: "models/checkpoints/fs26/classification/v19.person_view.efficientnetv2m.satudora10k+pa100k"
+
+resume_path: null # Path tới thư mục run để resume (nếu có)
+
+# Thứ tự các class (Quan trọng: phải khớp với chỉ số khi lưu/load model)
+classes:
+  - "back"
+  - "front"
+  - "side"
+
+# Dữ liệu tập Train: Mỗi class là một list các file .txt chứa đường dẫn ảnh
+train_data:
+  back: 
+    - "data/processed/fs26/train_data/classify_rgb/person_view/back/satudora10k--train.txt"
+    - "data/processed/fs26/train_data/classify_rgb/person_view/back/pa100k--train.txt"
+  front: 
+    - "data/processed/fs26/train_data/classify_rgb/person_view/front/satudora10k--train.txt"
+    - "data/processed/fs26/train_data/classify_rgb/person_view/front/pa100k--train.txt"
+  side: 
+    - "data/processed/fs26/train_data/classify_rgb/person_view/side/satudora10k--train.txt"
+    - "data/processed/fs26/train_data/classify_rgb/person_view/side/pa100k--train.txt"
+
+# Dữ liệu tập Val/Test
+val_data:
+  back: 
+    - "data/processed/fs26/train_data/classify_rgb/person_view/back/satudora10k--val.txt"
+    - "data/processed/fs26/train_data/classify_rgb/person_view/back/pa100k--val.txt"
+    - "data/processed/fs26/train_data/classify_rgb/person_view/back/pa100k--test.txt"
+  front: 
+    - "data/processed/fs26/train_data/classify_rgb/person_view/front/satudora10k--val.txt"
+    - "data/processed/fs26/train_data/classify_rgb/person_view/front/pa100k--val.txt"
+    - "data/processed/fs26/train_data/classify_rgb/person_view/front/pa100k--test.txt"
+  side: 
+    - "data/processed/fs26/train_data/classify_rgb/person_view/side/satudora10k--val.txt"
+    - "data/processed/fs26/train_data/classify_rgb/person_view/side/pa100k--val.txt"
+    - "data/processed/fs26/train_data/classify_rgb/person_view/side/pa100k--test.txt"
+
+# Tham số Training
+epochs: 100
+batch_size: 32
+lr: 1e-5
+weight_decay: 0.0005
+patience: 30
+num_workers: 4
+precision: 32 # Có thể dùng 16 hoặc 32
+
+accelerator: "gpu" # "cpu", "gpu"
+devices: [2] # "auto", 0, 1, ...
+
+model: "efficientnetv2m"
+
+train_augment:
+  # - SquarePad: {}
+  - RandomHorizontalFlip: {}
+  - RandAugment:
+      num_ops: 4
+      magnitude: 9
+      interpolation: "BILINEAR"
+  - Downscale:
+      scale_range: [0.5, 0.5]
+      p: 0.1
+  - ChannelShuffle:
+      p: 0.5
+  # - GaussNoise:
+  #     p: 0.1
+  - ColorJitter:
+      hue: 0.15
+  - RandomGrayscale:
+      p: 0.1
+  - Resize:
+      size: [256, 192]
+  # - RandomResizedCrop:
+  #     size: [224, 224]
+  #     scale: [0.7, 1.0]
+  - ToTensor: {}
+  - Normalize:
+      mean: [0.485, 0.456, 0.406]
+      std: [0.229, 0.224, 0.225]
+
+val_augment:
+  # - SquarePad: {}
+  - Resize:
+      size: [256, 192]
+  - ToTensor: {}
+  - Normalize:
+      mean: [0.485, 0.456, 0.406]
+      std: [0.229, 0.224, 0.225]

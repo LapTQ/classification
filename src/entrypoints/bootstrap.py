@@ -13,6 +13,10 @@ def create_backbone(cfg: dict) -> nn.Module:
         from src.backbone.efficientnetv2s import get_efficientnetv2s
 
         backbone = get_efficientnetv2s(num_classes=num_classes)
+    elif model_name == "efficientnetv2m":
+        from src.backbone.efficientnetv2m import get_efficientnetv2m
+
+        backbone = get_efficientnetv2m(num_classes=num_classes)
     elif model_name == "resnet50":
         from src.backbone.resnet50 import get_resnet50
 

@@ -16,7 +16,7 @@ from src.core.utils import get_run_dir, visualize_batch
 from src.entrypoints.bootstrap import create_backbone, create_transform
 
 # ================= CẤU HÌNH TRỰC TIẾP =================
-CONFIG_PATH = "configs/v18.2dcnn.cluster-CNN-8--cut-l4.higher-lr.yaml"  # Path tới file cấu hình
+CONFIG_PATH = "configs/fs26.person_view/v19.person_view.efficientnetv2m.satudora10k+pa100k.yaml"  # Path tới file cấu hình
 # =====================================================
 
 
