@@ -8,7 +8,7 @@ from src.core.data import ClassifyDataModule
 from src.entrypoints.bootstrap import create_backbone, create_transform
 
 # ================= CẤU HÌNH TRỰC TIẾP =================
-CKPT_PATH = "/home/laptq/laptq-fs26-shoplifting-detection/runs/classification/fs26/v1.2dcnn.cluster-CNN-10/weights/best-epoch=00-val_acc=0.304.ckpt"
+CKPT_PATH = "models/checkpoints/fs26/classification/v19.person_view.efficientnetv2.satudora10k+pa100k/weights/best-epoch=07-val_acc=0.881.ckpt"
 # =====================================================
 
 

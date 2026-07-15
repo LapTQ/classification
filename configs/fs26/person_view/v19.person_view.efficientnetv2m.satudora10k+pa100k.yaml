@@ -1,7 +1,7 @@
 # Cấu hình huấn luyện ResNet50 cho Action Classification
 
 # Thư mục chứa kết quả train (weights, logs, visualizations)
-output_dir: "models/checkpoints/fs26/classification/v19.person_view.efficientnetv2m.satudora10k+pa100k"
+output_dir: "models/checkpoints/fs26/person_view/classification/v19.person_view.efficientnetv2m.satudora10k+pa100k"
 
 resume_path: null # Path tới thư mục run để resume (nếu có)
 
