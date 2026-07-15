@@ -14,29 +14,29 @@ classes:
 # Dữ liệu tập Train: Mỗi class là một list các file .txt chứa đường dẫn ảnh
 train_data:
   back: 
-    - "data/processed/fs26/train_data/classify_rgb/person_view/back/satudora10k--train.txt"
-    - "data/processed/fs26/train_data/classify_rgb/person_view/back/pa100k--train.txt"
+    - "data/processed/fs26/person_view/classificationback/satudora10k--train.txt"
+    - "data/processed/fs26/person_view/classificationback/pa100k--train.txt"
   front: 
-    - "data/processed/fs26/train_data/classify_rgb/person_view/front/satudora10k--train.txt"
-    - "data/processed/fs26/train_data/classify_rgb/person_view/front/pa100k--train.txt"
+    - "data/processed/fs26/person_view/classificationfront/satudora10k--train.txt"
+    - "data/processed/fs26/person_view/classificationfront/pa100k--train.txt"
   side: 
-    - "data/processed/fs26/train_data/classify_rgb/person_view/side/satudora10k--train.txt"
-    - "data/processed/fs26/train_data/classify_rgb/person_view/side/pa100k--train.txt"
+    - "data/processed/fs26/person_view/classificationside/satudora10k--train.txt"
+    - "data/processed/fs26/person_view/classificationside/pa100k--train.txt"
 
 # Dữ liệu tập Val/Test
 val_data:
   back: 
-    - "data/processed/fs26/train_data/classify_rgb/person_view/back/satudora10k--val.txt"
-    - "data/processed/fs26/train_data/classify_rgb/person_view/back/pa100k--val.txt"
-    - "data/processed/fs26/train_data/classify_rgb/person_view/back/pa100k--test.txt"
+    - "data/processed/fs26/person_view/classificationback/satudora10k--val.txt"
+    - "data/processed/fs26/person_view/classificationback/pa100k--val.txt"
+    - "data/processed/fs26/person_view/classificationback/pa100k--test.txt"
   front: 
-    - "data/processed/fs26/train_data/classify_rgb/person_view/front/satudora10k--val.txt"
-    - "data/processed/fs26/train_data/classify_rgb/person_view/front/pa100k--val.txt"
-    - "data/processed/fs26/train_data/classify_rgb/person_view/front/pa100k--test.txt"
+    - "data/processed/fs26/person_view/classificationfront/satudora10k--val.txt"
+    - "data/processed/fs26/person_view/classificationfront/pa100k--val.txt"
+    - "data/processed/fs26/person_view/classificationfront/pa100k--test.txt"
   side: 
-    - "data/processed/fs26/train_data/classify_rgb/person_view/side/satudora10k--val.txt"
-    - "data/processed/fs26/train_data/classify_rgb/person_view/side/pa100k--val.txt"
-    - "data/processed/fs26/train_data/classify_rgb/person_view/side/pa100k--test.txt"
+    - "data/processed/fs26/person_view/classificationside/satudora10k--val.txt"
+    - "data/processed/fs26/person_view/classificationside/pa100k--val.txt"
+    - "data/processed/fs26/person_view/classificationside/pa100k--test.txt"
 
 # Tham số Training
 epochs: 100
