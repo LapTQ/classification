@@ -33,9 +33,6 @@ class ActionDataset(Dataset):
                 txt_files = [txt_files]
 
             for txt_file in txt_files:
-                if not os.path.exists(txt_file):
-                    print(f"Warning: File {txt_file} does not exist.")
-                    continue
                 with open(txt_file, "r") as f:
                     paths = [line.strip() for line in f if line.strip()]
                     self.image_paths.extend(paths)

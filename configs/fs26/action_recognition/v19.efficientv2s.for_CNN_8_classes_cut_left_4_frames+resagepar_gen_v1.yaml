@@ -1,0 +1,110 @@
+# Cấu hình huấn luyện ResNet50 cho Action Classification
+
+# Thư mục chứa kết quả train (weights, logs, visualizations)
+output_dir: "models/checkpoints/fs26/action_recognition/classification/v19.efficientv2s.for_CNN_8_classes_cut_left_4_frames+resagepar_gen_v1"
+
+resume_path: null # Path tới thư mục run để resume (nếu có)
+
+# Thứ tự các class (Quan trọng: phải khớp với chỉ số khi lưu/load model)
+classes:
+  - "cho_tay_vao_tui_quan"
+  - "cho_tay_vao_tui_ao"
+  - "cho_tay_vao_tui_deo_tren_nguoi"
+  - "cho_tay_vao_tui_cam_tren_tay"
+  - "cho_tay_vao_gio_xe_hang"
+  - "cho_tay_vao_ke"
+  - "tay_cam_san_pham"
+  - "tay_khong_cam_san_pham"
+
+# Dữ liệu tập Train: Mỗi class là một list các file .txt chứa đường dẫn ảnh
+train_data:
+  cho_tay_vao_tui_quan:
+    - data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.cut_left_4_frames/cho_tay_vao_tui_quan/train--min4k--max5k.txt
+    - data/processed/fs26/action_recognition/classification/resagepar_gen_v1/cho_tay_vao_tui_quan/train_syn.txt
+  cho_tay_vao_tui_ao:
+    - data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.cut_left_4_frames/cho_tay_vao_tui_ao/train--min4k--max5k.txt
+    - data/processed/fs26/action_recognition/classification/resagepar_gen_v1/cho_tay_vao_tui_ao/train_syn.txt
+  cho_tay_vao_tui_deo_tren_nguoi:
+    - data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.cut_left_4_frames/cho_tay_vao_tui_deo_tren_nguoi/train--min4k--max5k.txt
+    - data/processed/fs26/action_recognition/classification/resagepar_gen_v1/cho_tay_vao_tui_deo_tren_nguoi/train_syn.txt
+  cho_tay_vao_tui_cam_tren_tay:
+    - data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.cut_left_4_frames/cho_tay_vao_tui_cam_tren_tay/train--min4k--max5k.txt
+    - data/processed/fs26/action_recognition/classification/resagepar_gen_v1/cho_tay_vao_tui_cam_tren_tay/train_syn.txt
+  cho_tay_vao_gio_xe_hang:
+    - data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.cut_left_4_frames/cho_tay_vao_gio_xe_hang/train--min4k--max5k.txt
+  cho_tay_vao_ke:
+    - data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.cut_left_4_frames/cho_tay_vao_ke/train--min4k--max5k.txt
+  tay_cam_san_pham:
+    - data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.cut_left_4_frames/tay_cam_san_pham/train--min4k--max5k.txt
+  tay_khong_cam_san_pham:
+    - data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.cut_left_4_frames/tay_khong_cam_san_pham/train--min4k--max5k.txt
+
+# Dữ liệu tập Val/Test
+val_data:
+  cho_tay_vao_tui_quan:
+    - data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.cut_left_4_frames/cho_tay_vao_tui_quan/val--min4k--max5k.txt
+  cho_tay_vao_tui_ao:
+    - data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.cut_left_4_frames/cho_tay_vao_tui_ao/val--min4k--max5k.txt
+  cho_tay_vao_tui_deo_tren_nguoi:
+    - data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.cut_left_4_frames/cho_tay_vao_tui_deo_tren_nguoi/val--min4k--max5k.txt
+  cho_tay_vao_tui_cam_tren_tay:
+    - data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.cut_left_4_frames/cho_tay_vao_tui_cam_tren_tay/val--min4k--max5k.txt
+  cho_tay_vao_gio_xe_hang:
+    - data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.cut_left_4_frames/cho_tay_vao_gio_xe_hang/val--min4k--max5k.txt
+  cho_tay_vao_ke:
+    - data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.cut_left_4_frames/cho_tay_vao_ke/val--min4k--max5k.txt
+  tay_cam_san_pham:
+    - data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.cut_left_4_frames/tay_cam_san_pham/val--min4k--max5k.txt
+  tay_khong_cam_san_pham:
+    - data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.cut_left_4_frames/tay_khong_cam_san_pham/val--min4k--max5k.txt
+
+# Tham số Training
+epochs: 100
+batch_size: 64
+lr: 1e-4
+weight_decay: 0.0005
+patience: 30
+num_workers: 32
+precision: 32 # Có thể dùng 16 hoặc 32
+
+accelerator: "gpu" # "cpu", "gpu"
+devices: [0, 5] # "auto", 0, 1, ...
+
+model: "efficientnetv2s"
+
+train_augment:
+  - SquarePad: {}
+  - RandomHorizontalFlip: {}
+  - RandAugment:
+      num_ops: 4
+      magnitude: 9
+      interpolation: "BILINEAR"
+  - Downscale:
+      scale_range: [0.5, 0.5]
+      p: 0.1
+  - ChannelShuffle:
+      p: 0.5
+  # - GaussNoise:
+  #     p: 0.1
+  - ColorJitter:
+      hue: 0.15
+  - RandomGrayscale:
+      p: 0.1
+  # - Resize:
+  #     size: [224, 224]
+  - RandomResizedCrop:
+      size: [224, 224]
+      scale: [0.7, 1.0]
+  - ToTensor: {}
+  - Normalize:
+      mean: [0.485, 0.456, 0.406]
+      std: [0.229, 0.224, 0.225]
+
+val_augment:
+  - SquarePad: {}
+  - Resize:
+      size: [224, 224]
+  - ToTensor: {}
+  - Normalize:
+      mean: [0.485, 0.456, 0.406]
+      std: [0.229, 0.224, 0.225]
