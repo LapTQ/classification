@@ -16,7 +16,7 @@ from src.core.utils import get_run_dir, visualize_batch
 from src.entrypoints.bootstrap import create_backbone, create_transform
 
 # ================= CẤU HÌNH TRỰC TIẾP =================
-CONFIG_PATH = "configs/fs26/action_recognition/v21.efficientv2s.for_CNN_8_classes_manually_selected+flux_set_1.v2.yaml"  # Path tới file cấu hình
+CONFIG_PATH = "configs/fs26/action_recognition/v21.efficientv2s.for_CNN_8_classes_manually_selected+flux_set_1.val_easy_medium.yaml"  # Path tới file cấu hình
 # =====================================================
 
 

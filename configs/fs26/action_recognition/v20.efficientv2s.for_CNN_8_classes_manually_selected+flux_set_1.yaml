@@ -47,44 +47,20 @@ train_data:
 val_data:
   cho_tay_vao_tui_quan:
     - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.cut_left_4_frames/cho_tay_vao_tui_quan/val--min4k--max5k.txt"
-    # - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_quan/val.easy.txt" # 612 ảnh
-    # - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_quan/val.medium.txt" # 450 ảnh
-    # - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_quan/val.hard.txt" # 1,496 ảnh
   cho_tay_vao_tui_ao:
     - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.cut_left_4_frames/cho_tay_vao_tui_ao/val--min4k--max5k.txt"
-    # - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_ao/val.easy.txt" # 548 ảnh
-    # - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_ao/val.medium.txt" # 573 ảnh
-    # - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_ao/val.hard.txt" # 844 ảnh
   cho_tay_vao_tui_deo_tren_nguoi:
     - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.cut_left_4_frames/cho_tay_vao_tui_deo_tren_nguoi/val--min4k--max5k.txt"
-    # - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_deo_tren_nguoi/val.easy.txt" # 1,289 ảnh
-    # - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_deo_tren_nguoi/val.medium.txt" # 1,458 ảnh
-    # - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_deo_tren_nguoi/val.hard.txt" # 1,235 ảnh
   cho_tay_vao_tui_cam_tren_tay:
     - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.cut_left_4_frames/cho_tay_vao_tui_cam_tren_tay/val--min4k--max5k.txt"
-    # - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_cam_tren_tay/val.easy.txt" # 922 ảnh
-    # - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_cam_tren_tay/val.medium.txt" # 828 ảnh
-    # - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_cam_tren_tay/val.hard.txt" # 3,930 ảnh
   cho_tay_vao_gio_xe_hang:
     - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.cut_left_4_frames/cho_tay_vao_gio_xe_hang/val--min4k--max5k.txt"
-    # - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_gio_xe_hang/val.easy.txt" # 3,209 ảnh
-    # - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_gio_xe_hang/val.medium.txt" # 5,435 ảnh
-    # - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_gio_xe_hang/val.hard.txt" # 3,043 ảnh
   cho_tay_vao_ke:
     - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.cut_left_4_frames/cho_tay_vao_ke/val--min4k--max5k.txt"
-    # - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_ke/val.easy.txt" # 4,693 ảnh
-    # - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_ke/val.medium.txt" # 3,222 ảnh
-    # - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_ke/val.hard.txt" # 1,266 ảnh
   tay_cam_san_pham:
     - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.cut_left_4_frames/tay_cam_san_pham/val--min4k--max5k.txt"
-    # - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/tay_cam_san_pham/val.easy.txt" # 4,342 ảnh
-    # - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/tay_cam_san_pham/val.medium.txt" # 3,624 ảnh
-    # - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/tay_cam_san_pham/val.hard.txt" # 6,174 ảnh
   tay_khong_cam_san_pham:
     - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.cut_left_4_frames/tay_khong_cam_san_pham/val--min4k--max5k.txt"
-    # - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/tay_khong_cam_san_pham/val.easy.txt" # 37,077 ảnh
-    # - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/tay_khong_cam_san_pham/val.medium.txt" # 9,431 ảnh
-    # - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/tay_khong_cam_san_pham/val.hard.txt" # 20,719 ảnh
 
 # Tham số Training
 epochs: 100
@@ -94,11 +70,11 @@ weight_decay: 0.0005
 patience: 30
 num_workers: 4
 precision: 32 # Có thể dùng 16 hoặc 32
-monitor_metric: "val_f1" # "val_f1", "val_acc", "val_loss", ... (Tiêu chí lưu best checkpoint & early stopping)
+monitor_metric: "val_acc" # "val_f1", "val_acc", "val_loss", ... (Tiêu chí lưu best checkpoint & early stopping)
 monitor_mode: "max" # "max" hoặc "min" (mặc định tự động: "min" cho loss, "max" cho các chỉ số khác)
 
 accelerator: "gpu" # "cpu", "gpu"
-devices: [0] # "auto", 0, 1, ...
+devices: [0, 1, 2, 3] # "auto", 0, 1, ...
 
 model: "efficientnetv2s"
 
