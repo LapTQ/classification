@@ -46,6 +46,8 @@ weight_decay: 0.0005
 patience: 20
 num_workers: 4
 precision: 32 # Có thể dùng 16 hoặc 32
+monitor_metric: "val_acc" # "val_f1", "val_acc", "val_loss", ... (Tiêu chí lưu best checkpoint & early stopping)
+monitor_mode: "max" # "max" hoặc "min" (mặc định tự động: "min" cho loss, "max" cho các chỉ số khác)
 
 accelerator: "gpu" # "cpu", "gpu"
 devices: [2, 3, 4, 5] # "auto", 0, 1, ...

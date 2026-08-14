@@ -16,7 +16,7 @@ from src.core.utils import get_run_dir, visualize_batch
 from src.entrypoints.bootstrap import create_backbone, create_transform
 
 # ================= CẤU HÌNH TRỰC TIẾP =================
-CONFIG_PATH = "configs/fs26/action_recognition/v19.efficientv2s.for_CNN_8_classes_cut_left_4_frames+resagepar_gen_v1.yaml"  # Path tới file cấu hình
+CONFIG_PATH = "configs/fs26/action_recognition/v21.efficientv2s.for_CNN_8_classes_manually_selected+flux_set_1.v2.yaml"  # Path tới file cấu hình
 # =====================================================
 
 
@@ -101,11 +101,14 @@ def train_model(config_path: str) -> None:
     )
 
     # 5. Callbacks & Loggers
+    monitor_metric = cfg["monitor_metric"]
+    monitor_mode = cfg["monitor_mode"]
+
     checkpoint_callback = ModelCheckpoint(
         dirpath=os.path.join(run_dir, "weights"),
-        filename="best-{epoch:02d}-{val_acc:.3f}",
-        monitor="val_acc",
-        mode="max",
+        filename=f"best-{{epoch:02d}}-{{{monitor_metric}:.3f}}",
+        monitor=monitor_metric,
+        mode=monitor_mode,
         save_last=True,
     )
 
@@ -120,7 +123,11 @@ def train_model(config_path: str) -> None:
         devices=devices,
         callbacks=[
             checkpoint_callback,
-            EarlyStopping(monitor="val_acc", mode="max", patience=cfg["patience"]),
+            EarlyStopping(
+                monitor=monitor_metric,
+                mode=monitor_mode,
+                patience=cfg["patience"],
+            ),
             LearningRateMonitor(logging_interval="epoch"),
         ],
         logger=loggers,

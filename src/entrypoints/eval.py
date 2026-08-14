@@ -8,7 +8,7 @@ from src.core.data import ClassifyDataModule
 from src.entrypoints.bootstrap import create_backbone, create_transform
 
 # ================= CẤU HÌNH TRỰC TIẾP =================
-CKPT_PATH = "models/checkpoints/fs26/action_recognition/classification/v19.efficientv2s.for_CNN_8_classes_cut_left_4_frames+resagepar_gen_v1/weights/best-epoch=03-val_acc=0.396.ckpt"
+CKPT_PATH = "models/checkpoints/fs26/action_recognition/classification/v20.efficientv2s.for_CNN_8_classes_manually_selected+flux_set_1/weights/best-epoch=27-val_acc=0.432.ckpt"
 # =====================================================
 
 

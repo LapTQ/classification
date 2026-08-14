@@ -35,6 +35,15 @@ class ClassifyModel(pl.LightningModule):
         self.test_acc = torchmetrics.Accuracy(
             task="multiclass", num_classes=num_classes
         )
+        self.train_f1 = torchmetrics.F1Score(
+            task="multiclass", num_classes=num_classes, average="macro"
+        )
+        self.val_f1 = torchmetrics.F1Score(
+            task="multiclass", num_classes=num_classes, average="macro"
+        )
+        self.test_f1 = torchmetrics.F1Score(
+            task="multiclass", num_classes=num_classes, average="macro"
+        )
         self.test_cm = MulticlassConfusionMatrix(num_classes=num_classes)
         self.class_names = class_names
 
@@ -49,6 +58,7 @@ class ClassifyModel(pl.LightningModule):
         loss = self.loss_fn(logits, y)
 
         acc = self.train_acc(logits, y)
+        f1 = self.train_f1(logits, y)
         self.log(
             "train_loss",
             loss,
@@ -65,6 +75,14 @@ class ClassifyModel(pl.LightningModule):
             prog_bar=True,
             batch_size=x.shape[0],
         )
+        self.log(
+            "train_f1",
+            f1,
+            on_step=False,
+            on_epoch=True,
+            prog_bar=True,
+            batch_size=x.shape[0],
+        )
         return loss
 
     def validation_step(
@@ -75,9 +93,13 @@ class ClassifyModel(pl.LightningModule):
         loss = self.loss_fn(logits, y)
 
         self.val_acc(logits, y)
+        self.val_f1(logits, y)
         self.log("val_loss", loss, on_epoch=True, prog_bar=True, batch_size=x.shape[0])
         self.log(
             "val_acc", self.val_acc, on_epoch=True, prog_bar=True, batch_size=x.shape[0]
+        )
+        self.log(
+            "val_f1", self.val_f1, on_epoch=True, prog_bar=True, batch_size=x.shape[0]
         )
         return loss
 
@@ -88,9 +110,12 @@ class ClassifyModel(pl.LightningModule):
         logits = self(x)
         loss = F.cross_entropy(logits, y)
         self.test_acc(logits, y)
+        self.test_f1(logits, y)
         self.test_cm.update(logits, y)
         self.log("test_loss", loss, on_epoch=True, batch_size=x.shape[0])
         self.log("test_acc", self.test_acc, on_epoch=True, batch_size=x.shape[0])
+        self.log("test_f1", self.test_f1, on_epoch=True, batch_size=x.shape[0])
+        return loss
 
     def on_test_epoch_end(self) -> None:
         cm = self.test_cm.compute()
