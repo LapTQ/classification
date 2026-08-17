@@ -9,18 +9,14 @@ from src.entrypoints.bootstrap import create_backbone, create_transform
 from tqdm import tqdm
 
 # ================= CẤU HÌNH TRỰC TIẾP =================
-CKPT_PATH = "/home/laptq/laptq-fs26-shoplifting-detection/runs/classification/fs26/v4.2dcnn.cluster-CNN-8--cut-l4/weights/best-epoch=03-val_acc=0.396.ckpt"
+CKPT_PATH = "models/checkpoints/fs26/action_recognition/classification/v21.efficientv2s.for_CNN_8_classes_manually_selected+flux_set_1.val_easy_medium/weights/best-epoch=34-val_f1=0.434.ckpt"
 INPUT_PATHS = [
-    "/home/laptq/laptq-fs26-shoplifting-detection/outputs/train_data/classify_rgb/my_format/labels_actions--cluster-CNN-8--cut-l4/cho_tay_vao_tui_quan/val.txt",
-    "/home/laptq/laptq-fs26-shoplifting-detection/outputs/train_data/classify_rgb/my_format/labels_actions--cluster-CNN-8--cut-l4/cho_tay_vao_tui_ao/val.txt",
-    "/home/laptq/laptq-fs26-shoplifting-detection/outputs/train_data/classify_rgb/my_format/labels_actions--cluster-CNN-8--cut-l4/cho_tay_vao_tui_deo_tren_nguoi/val.txt",
-    "/home/laptq/laptq-fs26-shoplifting-detection/outputs/train_data/classify_rgb/my_format/labels_actions--cluster-CNN-8--cut-l4/cho_tay_vao_tui_cam_tren_tay/val.txt",
-    # "/home/laptq/laptq-fs26-shoplifting-detection/outputs/train_data/classify_rgb/my_format/labels_actions--cluster-CNN-8--cut-l4/cho_tay_vao_gio_xe_hang/val.txt",
-    # "/home/laptq/laptq-fs26-shoplifting-detection/outputs/train_data/classify_rgb/my_format/labels_actions--cluster-CNN-8--cut-l4/cho_tay_vao_ke/val.txt",
-    # "/home/laptq/laptq-fs26-shoplifting-detection/outputs/train_data/classify_rgb/my_format/labels_actions--cluster-CNN-8--cut-l4/tay_cam_san_pham/val.txt",
-    # "/home/laptq/laptq-fs26-shoplifting-detection/outputs/train_data/classify_rgb/my_format/labels_actions--cluster-CNN-8--cut-l4/tay_khong_cam_san_pham/val.txt",
+    "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_quan/val.easy.txt",
+    "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_ao/val.easy.txt",
+    "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_deo_tren_nguoi/val.easy.txt",
+    "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_cam_tren_tay/val.easy.txt",
 ]  # Path tới file ảnh, file .txt hoặc thư mục
-DEVICE = "cuda:5"
+DEVICE = "cuda:2"
 BATCH_SIZE = 64
 OUTPUT_PATH = "/home/laptq/laptq-fs26-shoplifting-detection/outputs/trivials/predict_2dcnn_action/predictions.txt"
 # =====================================================

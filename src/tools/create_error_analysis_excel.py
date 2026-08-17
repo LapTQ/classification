@@ -10,13 +10,13 @@ from typing import Optional
 # ================= CẤU HÌNH TRỰC TIẾP =================
 PREDICTIONS_FILE = "/home/laptq/laptq-fs26-shoplifting-detection/outputs/trivials/predict_2dcnn_action/predictions.txt"
 VAL_DATA = {
-    "cho_tay_vao_tui_quan": ["/home/laptq/laptq-fs26-shoplifting-detection/outputs/train_data/classify_rgb/my_format/labels_actions--cluster-CNN-8--cut-l4/cho_tay_vao_tui_quan/val--min4k--max5k.txt"],
-    "cho_tay_vao_tui_ao": ["/home/laptq/laptq-fs26-shoplifting-detection/outputs/train_data/classify_rgb/my_format/labels_actions--cluster-CNN-8--cut-l4/cho_tay_vao_tui_ao/val--min4k--max5k.txt"],
-    "cho_tay_vao_tui_deo_tren_nguoi": ["/home/laptq/laptq-fs26-shoplifting-detection/outputs/train_data/classify_rgb/my_format/labels_actions--cluster-CNN-8--cut-l4/cho_tay_vao_tui_deo_tren_nguoi/val--min4k--max5k.txt"],
-    "cho_tay_vao_tui_cam_tren_tay": ["/home/laptq/laptq-fs26-shoplifting-detection/outputs/train_data/classify_rgb/my_format/labels_actions--cluster-CNN-8--cut-l4/cho_tay_vao_tui_cam_tren_tay/val--min4k--max5k.txt"]
+    "cho_tay_vao_tui_quan": ["data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_quan/val.easy.txt"],
+    "cho_tay_vao_tui_ao": ["data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_ao/val.easy.txt"],
+    "cho_tay_vao_tui_deo_tren_nguoi": ["data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_deo_tren_nguoi/val.easy.txt"],
+    "cho_tay_vao_tui_cam_tren_tay": ["data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_cam_tren_tay/val.easy.txt"]
 }
-OUTPUT_FILE = "error_analysis.xlsx"  # Path tới file excel kết quả
-MAX_IMAGES_PER_SHEET = 500  # Giới hạn số lượng ảnh lỗi trên mỗi sheet
+OUTPUT_FILE = "data/tmp/error_analysis/action_recognition/classification/excels/error_analysis.xlsx"  # Path tới file excel kết quả
+MAX_IMAGES_PER_SHEET = 5000  # Giới hạn số lượng ảnh lỗi trên mỗi sheet
 SEED = 42  # None: sắp xếp theo tên; int: xáo trộn ngẫu nhiên theo seed
 # =====================================================
 

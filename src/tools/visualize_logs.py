@@ -96,6 +96,6 @@ def visualize_training(run_dir: str) -> None:
 
 if __name__ == "__main__":
     # Dán đường dẫn thư mục run của bạn vào đây
-    RUN_DIR = "models/checkpoints/fs26/action_recognition/classification/v21.efficientv2s.for_CNN_8_classes_manually_selected+flux_set_1.v2"
+    RUN_DIR = "models/checkpoints/fs26/action_recognition/classification/v21.efficientv2s.for_CNN_8_classes_manually_selected+flux_set_1.val_easy_medium"
 
     visualize_training(RUN_DIR)
