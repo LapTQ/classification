@@ -270,12 +270,20 @@ def main() -> None:
         #     "data/processed/fs26/action_recognition/classification_multilabel/action.for_CNN.8_classes_grouped_123.cut_left_4_frames/tay_khong_cam_san_pham/val--min4k--max5k.txt",
         #     "data/processed/fs26/action_recognition/classification_multilabel",
         # ),
+        # (
+        #     "data/tmp/action_recognition_labels/gt/resagepar/cho_tay_vao_tui_ao_tui_deo_tui_cam_tay/train_resagepar.txt",
+        #     "data/tmp/action_recognition_labels/gt",
+        # ),
+        # (
+        #     "data/tmp/action_recognition_labels/gt/resagepar/cho_tay_vao_tui_quan/train_resagepar.txt",
+        #     "data/tmp/action_recognition_labels/gt",
+        # )
         (
-            "data/tmp/action_recognition_labels/gt/action.for_CNN.8_classes_grouped_123.cut_left_4_frames/cho_tay_vao_tui_ao_tui_deo_tui_cam_tay/train_resagepar.txt",
+            "data/tmp/action_recognition_labels/gt/resagepar/cho_tay_vao_tui_ao_tui_deo_tui_cam_tay/train_resagepar_v2.txt",
             "data/tmp/action_recognition_labels/gt",
         ),
         (
-            "data/tmp/action_recognition_labels/gt/action.for_CNN.8_classes_grouped_123.cut_left_4_frames/cho_tay_vao_tui_quan/train_resagepar.txt",
+            "data/tmp/action_recognition_labels/gt/resagepar/cho_tay_vao_tui_quan/train_resagepar_v2.txt",
             "data/tmp/action_recognition_labels/gt",
         )
     ]
