@@ -112,7 +112,7 @@ monitor_metric: "val_f1" # "val_f1", "val_acc", "val_loss", ... (Tiêu chí lưu
 monitor_mode: "max" # "max" hoặc "min" (mặc định tự động: "min" cho loss, "max" cho các chỉ số khác)
 
 accelerator: "gpu" # "cpu", "gpu"
-devices: [0] # "auto", 0, 1, ...
+devices: [0, 1, 2] # "auto", 0, 1, ...
 
 model: "efficientnetv2s"
 
