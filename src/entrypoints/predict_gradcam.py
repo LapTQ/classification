@@ -14,17 +14,19 @@ from src.entrypoints.bootstrap import create_backbone, create_transform
 # ================= CẤU HÌNH TRỰC TIẾP =================
 CKPT_PATH = "models/checkpoints/fs26/action_recognition/classification/v22.efficientv2s.for_CNN_8_classes_manually_selected+flux_set_1_2+masked/weights/best-epoch=29-val_f1=0.435.ckpt"
 INPUT_PATHS = [
+    # "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_cam_tren_tay/train.txt",
+
     # "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_quan/val.easy.txt",
     # "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_ao/val.easy.txt",
     # "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_deo_tren_nguoi/val.easy.txt",
-    "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_cam_tren_tay/val.easy.txt",
+    # "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_cam_tren_tay/val.easy.txt",
 
-    # "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_cam_tren_tay/train.txt"
-    # "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-1/cho_tay_vao_ke/train.txt"
+    # "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-1/cho_tay_vao_tui_cam_tren_tay/train.txt"
+    "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-1.masked+grid2/cho_tay_vao_tui_cam_tren_tay/train.txt"
 ]  # Path tới file ảnh, file .txt hoặc thư mục
 DEVICE = "cuda:1"
-BATCH_SIZE = 32
-OUTPUT_DIR = "data/tmp/predict_2dcnn_action_gradcam"
+BATCH_SIZE = 16
+OUTPUT_DIR = "data/tmp/predict_2dcnn_action_gradcam/v22"
 # =====================================================
 
 
@@ -149,8 +151,8 @@ def predict_gradcam(
             label: str = classes[label_idx]
             score: float = float(scores[j].item())
 
-            base_name = os.path.basename(path)
-            out_name = f"{label}_{score:.4f}_{base_name}"
+            global_idx: int = i + j
+            out_name = f"{global_idx:05d}_{label}_{score:.4f}.jpg"
             out_path = os.path.join(output_dir, out_name)
             result_img.save(out_path)
 
