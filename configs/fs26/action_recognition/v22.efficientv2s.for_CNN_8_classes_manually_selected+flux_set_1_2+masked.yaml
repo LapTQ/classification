@@ -1,0 +1,177 @@
+# Cấu hình huấn luyện ResNet50 cho Action Classification
+
+# Thư mục chứa kết quả train (weights, logs, visualizations)
+output_dir: "models/checkpoints/fs26/action_recognition/classification/v22.efficientv2s.for_CNN_8_classes_manually_selected+flux_set_1_2+masked"
+
+resume_path: null # Path tới thư mục run để resume (nếu có)
+
+# Thứ tự các class (Quan trọng: phải khớp với chỉ số khi lưu/load model)
+classes:
+  - "cho_tay_vao_tui_quan"
+  - "cho_tay_vao_tui_ao"
+  - "cho_tay_vao_tui_deo_tren_nguoi"
+  - "cho_tay_vao_tui_cam_tren_tay"
+  - "cho_tay_vao_gio_xe_hang"
+  - "cho_tay_vao_ke"
+  - "tay_cam_san_pham"
+  - "tay_khong_cam_san_pham"
+
+# Dữ liệu tập Train: Mỗi class là một list các file .txt chứa đường dẫn ảnh
+train_data:
+  cho_tay_vao_tui_quan:
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_quan/train.txt" # 116 ảnh
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-1/cho_tay_vao_tui_quan/train.txt" # 748 ảnh
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-1.masked/cho_tay_vao_tui_quan/train.txt" # 727 ảnh
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_quan/train.txt"
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-1/cho_tay_vao_tui_quan/train.txt"
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-1.masked/cho_tay_vao_tui_quan/train.txt"
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_quan/train.txt"
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-1/cho_tay_vao_tui_quan/train.txt"
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-1.masked/cho_tay_vao_tui_quan/train.txt"
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_quan/train.txt"
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-1/cho_tay_vao_tui_quan/train.txt"
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-1.masked/cho_tay_vao_tui_quan/train.txt"
+  cho_tay_vao_tui_ao:
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_ao/train.txt" # 106 ảnh
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-1/cho_tay_vao_tui_ao/train.txt" # 995 ảnh
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-1.masked/cho_tay_vao_tui_ao/train.txt" # 938 ảnh
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_ao/train.txt"
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-1/cho_tay_vao_tui_ao/train.txt"
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-1.masked/cho_tay_vao_tui_ao/train.txt"
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_ao/train.txt"
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-1/cho_tay_vao_tui_ao/train.txt"
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-1.masked/cho_tay_vao_tui_ao/train.txt"
+  cho_tay_vao_tui_deo_tren_nguoi:
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_deo_tren_nguoi/train.txt" # 185 ảnh
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-1/cho_tay_vao_tui_deo_tren_nguoi/train.txt" # 1,697 ảnh
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-1.masked/cho_tay_vao_tui_deo_tren_nguoi/train.txt" # 1,611 ảnh
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_deo_tren_nguoi/train.txt"
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-1/cho_tay_vao_tui_deo_tren_nguoi/train.txt"
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-1.masked/cho_tay_vao_tui_deo_tren_nguoi/train.txt"
+  cho_tay_vao_tui_cam_tren_tay:
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_cam_tren_tay/train.txt" # 202 ảnh
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-1/cho_tay_vao_tui_cam_tren_tay/train.txt" # 1,071 ảnh
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-1.masked/cho_tay_vao_tui_cam_tren_tay/train.txt" # 965 ảnh
+
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-2/cho_tay_vao_tui_cam_tren_tay/train.txt" # 238 ảnh
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-2.masked/cho_tay_vao_tui_cam_tren_tay/train.txt" # 238 ảnh
+
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_cam_tren_tay/train.txt"
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-1/cho_tay_vao_tui_cam_tren_tay/train.txt"
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-1.masked/cho_tay_vao_tui_cam_tren_tay/train.txt"
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-2/cho_tay_vao_tui_cam_tren_tay/train.txt"
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-2.masked/cho_tay_vao_tui_cam_tren_tay/train.txt"
+  cho_tay_vao_gio_xe_hang:
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_gio_xe_hang/train.txt" # 889 ảnh
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-1/cho_tay_vao_gio_xe_hang/train.txt" # 2,100 ảnh
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_gio_xe_hang/train.txt"
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-1/cho_tay_vao_gio_xe_hang/train.txt"
+  cho_tay_vao_ke:
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_ke/train.txt" # 848 ảnh
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-1/cho_tay_vao_ke/train.txt" # 1,960 ảnh
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_ke/train.txt"
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-1/cho_tay_vao_ke/train.txt"
+  tay_cam_san_pham:
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/tay_cam_san_pham/train.txt" # 730 ảnh
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-1/tay_cam_san_pham/train.txt" # 1,759 ảnh
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/tay_cam_san_pham/train.txt"
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-1/tay_cam_san_pham/train.txt"
+  tay_khong_cam_san_pham:
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/tay_khong_cam_san_pham/train.txt" # 1,805 ảnh
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-1/tay_khong_cam_san_pham/train.txt" # 4,284 ảnh
+
+# Dữ liệu tập Val/Test
+val_data:
+  cho_tay_vao_tui_quan:
+    # - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.cut_left_4_frames/cho_tay_vao_tui_quan/val--min4k--max5k.txt"
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_quan/val.easy.txt" # 612 ảnh
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_quan/val.medium.txt" # 450 ảnh
+    # - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_quan/val.hard.txt" # 1,496 ảnh
+  cho_tay_vao_tui_ao:
+    # - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.cut_left_4_frames/cho_tay_vao_tui_ao/val--min4k--max5k.txt"
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_ao/val.easy.txt" # 548 ảnh
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_ao/val.medium.txt" # 573 ảnh
+    # - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_ao/val.hard.txt" # 844 ảnh
+  cho_tay_vao_tui_deo_tren_nguoi:
+    # - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.cut_left_4_frames/cho_tay_vao_tui_deo_tren_nguoi/val--min4k--max5k.txt"
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_deo_tren_nguoi/val.easy.txt" # 1,289 ảnh
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_deo_tren_nguoi/val.medium.txt" # 1,458 ảnh
+    # - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_deo_tren_nguoi/val.hard.txt" # 1,235 ảnh
+  cho_tay_vao_tui_cam_tren_tay:
+    # - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.cut_left_4_frames/cho_tay_vao_tui_cam_tren_tay/val--min4k--max5k.txt"
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_cam_tren_tay/val.easy.txt" # 922 ảnh
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_cam_tren_tay/val.medium.txt" # 828 ảnh
+    # - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_cam_tren_tay/val.hard.txt" # 3,930 ảnh
+  cho_tay_vao_gio_xe_hang:
+    # - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.cut_left_4_frames/cho_tay_vao_gio_xe_hang/val--min4k--max5k.txt"
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_gio_xe_hang/val.easy.txt" # 3,209 ảnh
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_gio_xe_hang/val.medium.txt" # 5,435 ảnh
+    # - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_gio_xe_hang/val.hard.txt" # 3,043 ảnh
+  cho_tay_vao_ke:
+    # - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.cut_left_4_frames/cho_tay_vao_ke/val--min4k--max5k.txt"
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_ke/val.easy.txt" # 4,693 ảnh
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_ke/val.medium.txt" # 3,222 ảnh
+    # - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_ke/val.hard.txt" # 1,266 ảnh
+  tay_cam_san_pham:
+    # - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.cut_left_4_frames/tay_cam_san_pham/val--min4k--max5k.txt"
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/tay_cam_san_pham/val.easy.txt" # 4,342 ảnh
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/tay_cam_san_pham/val.medium.txt" # 3,624 ảnh
+    # - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/tay_cam_san_pham/val.hard.txt" # 6,174 ảnh
+  tay_khong_cam_san_pham:
+    # - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.cut_left_4_frames/tay_khong_cam_san_pham/val--min4k--max5k.txt"
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/tay_khong_cam_san_pham/val.easy.txt" # 37,077 ảnh
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/tay_khong_cam_san_pham/val.medium.txt" # 9,431 ảnh
+    # - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/tay_khong_cam_san_pham/val.hard.txt" # 20,719 ảnh
+
+# Tham số Training
+epochs: 100
+batch_size: 64
+lr: 1e-4
+weight_decay: 0.0005
+patience: 30
+num_workers: 16
+precision: 32 # Có thể dùng 16 hoặc 32
+monitor_metric: "val_f1" # "val_f1", "val_acc", "val_loss", ... (Tiêu chí lưu best checkpoint & early stopping)
+monitor_mode: "max" # "max" hoặc "min" (mặc định tự động: "min" cho loss, "max" cho các chỉ số khác)
+
+accelerator: "gpu" # "cpu", "gpu"
+devices: [0, 1] # "auto", 0, 1, ...
+
+model: "efficientnetv2s"
+
+train_augment:
+  - SquarePad: {}
+  - RandomHorizontalFlip: {}
+  - RandAugment:
+      num_ops: 2
+      magnitude: 9
+      interpolation: "BILINEAR"
+  - Downscale:
+      scale_range: [0.5, 0.5]
+      p: 0.1
+  - ChannelShuffle:
+      p: 0.5
+  # - GaussNoise:
+  #     p: 0.1
+  - ColorJitter:
+      hue: 0.15
+  - RandomGrayscale:
+      p: 0.1
+  # - Resize:
+  #     size: [224, 224]
+  - RandomResizedCrop:
+      size: [224, 224]
+      scale: [0.7, 1.0]
+  - ToTensor: {}
+  - Normalize:
+      mean: [0.485, 0.456, 0.406]
+      std: [0.229, 0.224, 0.225]
+
+val_augment:
+  - SquarePad: {}
+  - Resize:
+      size: [224, 224]
+  - ToTensor: {}
+  - Normalize:
+      mean: [0.485, 0.456, 0.406]
+      std: [0.229, 0.224, 0.225]

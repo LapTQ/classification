@@ -9,16 +9,16 @@ from src.entrypoints.bootstrap import create_backbone, create_transform
 from tqdm import tqdm
 
 # ================= CẤU HÌNH TRỰC TIẾP =================
-CKPT_PATH = "models/checkpoints/fs26/action_recognition/classification/v21.efficientv2s.for_CNN_8_classes_manually_selected+flux_set_1.val_easy_medium/weights/best-epoch=34-val_f1=0.434.ckpt"
+CKPT_PATH = "models/checkpoints/fs26/action_recognition/classification/v22.efficientv2s.for_CNN_8_classes_manually_selected+flux_set_1_2/weights/best-epoch=10-val_f1=0.412.ckpt"
 INPUT_PATHS = [
     "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_quan/val.easy.txt",
     "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_ao/val.easy.txt",
     "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_deo_tren_nguoi/val.easy.txt",
     "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_cam_tren_tay/val.easy.txt",
 ]  # Path tới file ảnh, file .txt hoặc thư mục
-DEVICE = "cuda:2"
+DEVICE = "cuda:1"
 BATCH_SIZE = 64
-OUTPUT_PATH = "/home/laptq/laptq-fs26-shoplifting-detection/outputs/trivials/predict_2dcnn_action/predictions.txt"
+OUTPUT_PATH = "data/tmp/predict_2dcnn_action/predictions.txt"
 # =====================================================
 
 

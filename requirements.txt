@@ -6,3 +6,5 @@ pyyaml
 matplotlib
 pillow
 numpy
+grad-cam
+opencv-python
