@@ -1,7 +1,7 @@
 # Cấu hình huấn luyện ResNet50 cho Action Classification
 
 # Thư mục chứa kết quả train (weights, logs, visualizations)
-output_dir: "models/checkpoints/fs26/action_recognition/classification/v24.efficientv2s.for_CNN_8_classes_manually_selected+flux_set_1_2_3"
+output_dir: "models/checkpoints/fs26/action_recognition/classification/v26.efficientv2s.for_CNN_8_classes_manually_selected+flux_set_1_2_3_4_5"
 
 resume_path: null # Path tới thư mục run để resume (nếu có)
 
@@ -21,11 +21,13 @@ train_data:
   cho_tay_vao_tui_quan:
     - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_quan/train.txt" # 116 ảnh
     - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-1/cho_tay_vao_tui_quan/train.txt" # 748 ảnh
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-4/cho_tay_vao_tui_quan/train.txt" # 459
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-5/cho_tay_vao_tui_quan/train.txt" # 795
 
     - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_quan/train.txt"
     - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-1/cho_tay_vao_tui_quan/train.txt"
-    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_quan/train.txt"
-    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-1/cho_tay_vao_tui_quan/train.txt"
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-4/cho_tay_vao_tui_quan/train.txt"
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-5/cho_tay_vao_tui_quan/train.txt"
   cho_tay_vao_tui_ao:
     - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_ao/train.txt" # 106 ảnh
     - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-1/cho_tay_vao_tui_ao/train.txt" # 995 ảnh
