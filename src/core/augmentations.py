@@ -1,7 +1,7 @@
 import torchvision.transforms.functional as F
 from PIL import Image
 import torch
-from typing import Tuple
+from typing import Tuple, Union
 import albumentations as A
 import numpy as np
 
@@ -44,3 +44,8 @@ class Downscale(BaseAlbumentationConverter):
 class GaussNoise(BaseAlbumentationConverter):
     def __init__(self, std_range=(0.1, 0.1), p=0.5):
         self.transform = A.GaussNoise(std_range=std_range, p=p)
+
+
+class GaussianBlur(BaseAlbumentationConverter):
+    def __init__(self, blur_limit: Union[int, Tuple[int, int]] = 7, p: float = 0.5) -> None:
+        self.transform = A.GaussianBlur(blur_limit=blur_limit, p=p)

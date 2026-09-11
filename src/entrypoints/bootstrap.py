@@ -32,7 +32,7 @@ def create_backbone(cfg: dict) -> nn.Module:
 
 
 def create_transform(aug_list: list) -> T.Compose:
-    from src.core.augmentations import ChannelShuffle, Downscale, GaussNoise, SquarePad
+    from src.core.augmentations import ChannelShuffle, Downscale, GaussNoise, SquarePad, GaussianBlur
 
     assert aug_list
 
@@ -83,6 +83,10 @@ def create_transform(aug_list: list) -> T.Compose:
         elif name == "GaussNoise":
             p = params["p"]
             transforms.append(GaussNoise(p=p))
+        elif name == "GaussianBlur":
+            blur_limit = params["blur_limit"]
+            p = params["p"]
+            transforms.append(GaussianBlur(blur_limit=blur_limit, p=p))
         elif name == "RandomResizedCrop":
             size = (
                 tuple(params["size"])
