@@ -1,7 +1,7 @@
 # Cấu hình huấn luyện ResNet50 cho Action Classification
 
 # Thư mục chứa kết quả train (weights, logs, visualizations)
-output_dir: "models/checkpoints/fs26/action_recognition/classification/v29.efficientv2s.for_CNN_8_classes_manually_selected+flux_set_1_2_3_4_7.draw_arms"
+output_dir: "models/checkpoints/fs26/action_recognition/classification/v29.efficientv2s.for_CNN_8_classes_manually_selected+flux_set_1_2_3_4_5_7.draw_arms"
 
 resume_path: null # Path tới thư mục run để resume (nếu có)
 
