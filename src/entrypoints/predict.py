@@ -9,15 +9,16 @@ from src.entrypoints.bootstrap import create_backbone, create_transform
 from tqdm import tqdm
 
 # ================= CẤU HÌNH TRỰC TIẾP =================
-CKPT_PATH = "models/checkpoints/fs26/action_recognition/classification/v22.efficientv2s.for_CNN_8_classes_manually_selected+flux_set_1_2/weights/best-epoch=10-val_f1=0.412.ckpt"
+CKPT_PATH = "models/checkpoints/fs26/action_recognition/classification/v28.efficientv2s.for_CNN_8_classes_manually_selected+flux_set_1_2_3_4_5_7/weights/best-epoch=29-val_f1=0.506.ckpt"
 INPUT_PATHS = [
-    "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_quan/val.easy.txt",
+    # "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_quan/val.easy.txt",
     "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_ao/val.easy.txt",
-    "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_deo_tren_nguoi/val.easy.txt",
-    "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_cam_tren_tay/val.easy.txt",
+    "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_ao/val.medium.txt",
+    # "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_deo_tren_nguoi/val.easy.txt",
+    # "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_cam_tren_tay/val.easy.txt",
 ]  # Path tới file ảnh, file .txt hoặc thư mục
-DEVICE = "cuda:1"
-BATCH_SIZE = 64
+DEVICE = "cuda:0"
+BATCH_SIZE = 128
 OUTPUT_PATH = "data/tmp/predict_2dcnn_action/predictions.txt"
 # =====================================================
 

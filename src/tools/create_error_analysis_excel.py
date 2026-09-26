@@ -8,12 +8,15 @@ import io
 from typing import Optional
 
 # ================= CẤU HÌNH TRỰC TIẾP =================
-PREDICTIONS_FILE = "/home/laptq/laptq-fs26-shoplifting-detection/outputs/trivials/predict_2dcnn_action/predictions.txt"
+PREDICTIONS_FILE = "data/tmp/predict_2dcnn_action/predictions.txt"
 VAL_DATA = {
-    "cho_tay_vao_tui_quan": ["data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_quan/val.easy.txt"],
-    "cho_tay_vao_tui_ao": ["data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_ao/val.easy.txt"],
-    "cho_tay_vao_tui_deo_tren_nguoi": ["data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_deo_tren_nguoi/val.easy.txt"],
-    "cho_tay_vao_tui_cam_tren_tay": ["data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_cam_tren_tay/val.easy.txt"]
+    # "cho_tay_vao_tui_quan": ["data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_quan/val.easy.txt"],
+    "cho_tay_vao_tui_ao": [
+        "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_ao/val.easy.txt", 
+        "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_ao/val.medium.txt"
+    ],
+    # "cho_tay_vao_tui_deo_tren_nguoi": ["data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_deo_tren_nguoi/val.easy.txt"],
+    # "cho_tay_vao_tui_cam_tren_tay": ["data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_cam_tren_tay/val.easy.txt"]
 }
 OUTPUT_FILE = "data/tmp/error_analysis/action_recognition/classification/excels/error_analysis.xlsx"  # Path tới file excel kết quả
 MAX_IMAGES_PER_SHEET = 5000  # Giới hạn số lượng ảnh lỗi trên mỗi sheet
