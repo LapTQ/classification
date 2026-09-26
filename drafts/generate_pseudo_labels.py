@@ -199,12 +199,12 @@ def main() -> None:
     """Main execution function to define paths and run labeling."""
     ckpt_path = "models/checkpoints/fs26/person_view/classification/v19.person_view.efficientnetv2m.satudora10k+pa100k/weights/best-epoch=07-val_acc=0.881.ckpt"
     output_dir = "data/tmp/person_view_labels/pseudo/"
-    device = "cuda:5"
-    batch_size = 64
+    device = "cuda:0"
+    batch_size = 128
 
     print("OK")
 
-    # Active data (person attributes classification multilabel files)
+    # person attributes classification multilabel files
     # active_inputs: List[Tuple[str, str]] = [
     #     (
     #         "data/processed/fs26/person_attributes/classification_multilabel/CIA_combined_with_geneated_editting.txt",
@@ -220,7 +220,7 @@ def main() -> None:
     #     ),
     # ]
 
-    # Inactive data (action recognition classification multilabel files for subsequent runs)
+    # action recognition classification multilabel files for subsequent runs
     active_inputs = [
         # (
         #     "data/processed/fs26/action_recognition/classification_multilabel/action.for_CNN.8_classes_grouped_123.cut_left_4_frames/cho_tay_vao_tui_quan/train--min4k--max5k.txt",
@@ -278,14 +278,88 @@ def main() -> None:
         #     "data/tmp/action_recognition_labels/gt/resagepar/cho_tay_vao_tui_quan/train_resagepar.txt",
         #     "data/tmp/action_recognition_labels/gt",
         # )
+        # (
+        #     "data/tmp/action_recognition_labels/gt/resagepar/cho_tay_vao_tui_ao_tui_deo_tui_cam_tay/train_resagepar_v2.txt",
+        #     "data/tmp/action_recognition_labels/gt",
+        # ),
+        # (
+        #     "data/tmp/action_recognition_labels/gt/resagepar/cho_tay_vao_tui_quan/train_resagepar_v2.txt",
+        #     "data/tmp/action_recognition_labels/gt",
+        # ),
+        #
+        # (
+        #     "data/tmp/action_recognition_labels/gt/action.for_CNN.8_classes_grouped_123.manually_selected/cho_tay_vao_gio_xe_hang/val.easy.txt",
+        #     "data/tmp/action_recognition_labels/gt",
+        # ),
+        # (
+        #     "data/tmp/action_recognition_labels/gt/action.for_CNN.8_classes_grouped_123.manually_selected/cho_tay_vao_gio_xe_hang/val.medium.txt",
+        #     "data/tmp/action_recognition_labels/gt",
+        # ),
+        # (
+        #     "data/tmp/action_recognition_labels/gt/action.for_CNN.8_classes_grouped_123.manually_selected/cho_tay_vao_ke/val.easy.txt",
+        #     "data/tmp/action_recognition_labels/gt",
+        # ),
+        # (
+        #     "data/tmp/action_recognition_labels/gt/action.for_CNN.8_classes_grouped_123.manually_selected/cho_tay_vao_ke/val.medium.txt",
+        #     "data/tmp/action_recognition_labels/gt",
+        # ),
+        # (
+        #     "data/tmp/action_recognition_labels/gt/action.for_CNN.8_classes_grouped_123.manually_selected/cho_tay_vao_tui_ao_tui_deo_tui_cam_tay/val.easy.txt",
+        #     "data/tmp/action_recognition_labels/gt",
+        # ),
+        # (
+        #     "data/tmp/action_recognition_labels/gt/action.for_CNN.8_classes_grouped_123.manually_selected/cho_tay_vao_tui_ao_tui_deo_tui_cam_tay/val.medium.txt",
+        #     "data/tmp/action_recognition_labels/gt",
+        # ),
+        # (
+        #     "data/tmp/action_recognition_labels/gt/action.for_CNN.8_classes_grouped_123.manually_selected/cho_tay_vao_tui_quan/val.easy.txt",
+        #     "data/tmp/action_recognition_labels/gt",
+        # ),
+        # (
+        #     "data/tmp/action_recognition_labels/gt/action.for_CNN.8_classes_grouped_123.manually_selected/cho_tay_vao_tui_quan/val.medium.txt",
+        #     "data/tmp/action_recognition_labels/gt",
+        # ),
+        # (
+        #     "data/tmp/action_recognition_labels/gt/action.for_CNN.8_classes_grouped_123.manually_selected/tay_cam_san_pham/val.easy.txt",
+        #     "data/tmp/action_recognition_labels/gt",
+        # ),
+        # (
+        #     "data/tmp/action_recognition_labels/gt/action.for_CNN.8_classes_grouped_123.manually_selected/tay_cam_san_pham/val.medium.txt",
+        #     "data/tmp/action_recognition_labels/gt",
+        # ),
+        # (
+        #     "data/tmp/action_recognition_labels/gt/action.for_CNN.8_classes_grouped_123.manually_selected/tay_khong_cam_san_pham/val.easy.txt",
+        #     "data/tmp/action_recognition_labels/gt",
+        # ),
+        # (
+        #     "data/tmp/action_recognition_labels/gt/action.for_CNN.8_classes_grouped_123.manually_selected/tay_khong_cam_san_pham/val.medium.txt",
+        #     "data/tmp/action_recognition_labels/gt",
+        # ),
+        #
         (
-            "data/tmp/action_recognition_labels/gt/resagepar/cho_tay_vao_tui_ao_tui_deo_tui_cam_tay/train_resagepar_v2.txt",
+            "data/tmp/action_recognition_labels/gt/action.for_CNN.8_classes_grouped_123.gen-flux--set-1/cho_tay_vao_gio_xe_hang/train.txt",
             "data/tmp/action_recognition_labels/gt",
         ),
         (
-            "data/tmp/action_recognition_labels/gt/resagepar/cho_tay_vao_tui_quan/train_resagepar_v2.txt",
+            "data/tmp/action_recognition_labels/gt/action.for_CNN.8_classes_grouped_123.gen-flux--set-1/cho_tay_vao_ke/train.txt",
             "data/tmp/action_recognition_labels/gt",
-        )
+        ),
+        (
+            "data/tmp/action_recognition_labels/gt/action.for_CNN.8_classes_grouped_123.gen-flux--set-1/cho_tay_vao_tui_ao_tui_deo_tui_cam_tay/train.txt",
+            "data/tmp/action_recognition_labels/gt",
+        ),
+        (
+            "data/tmp/action_recognition_labels/gt/action.for_CNN.8_classes_grouped_123.gen-flux--set-1/cho_tay_vao_tui_quan/train.txt",
+            "data/tmp/action_recognition_labels/gt",
+        ),
+        (
+            "data/tmp/action_recognition_labels/gt/action.for_CNN.8_classes_grouped_123.gen-flux--set-1/tay_cam_san_pham/train.txt",
+            "data/tmp/action_recognition_labels/gt",
+        ),
+        (
+            "data/tmp/action_recognition_labels/gt/action.for_CNN.8_classes_grouped_123.gen-flux--set-1/tay_khong_cam_san_pham/train.txt",
+            "data/tmp/action_recognition_labels/gt",
+        ),
     ]
 
     predict_pseudo_labels(
