@@ -1,7 +1,7 @@
 # Cấu hình huấn luyện ResNet50 cho Action Classification
 
 # Thư mục chứa kết quả train (weights, logs, visualizations)
-output_dir: "models/checkpoints/fs26/action_recognition/classification/v31.efficientv2s.for_CNN_8_classes_manually_selected+flux_set_1_2_3_4_5_7_8_9_10_11_12+sensenova_set_1_2"
+output_dir: "models/checkpoints/fs26/action_recognition/classification/v34.efficientv2s.for_CNN_8_classes_manually_selected+flux_set_1_2_3_4_5_7_8_9_10_11_12+sensenova_set_1_2_3"
 
 resume_path: null # Path tới thư mục run để resume (nếu có)
 pretrained_path: null # Path tới checkpoint pre-trained để finetune từ đầu (nếu có)
@@ -34,18 +34,29 @@ train_data:
     - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-1/cho_tay_vao_tui_ao/train.txt" # 995 ảnh
     - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-7/cho_tay_vao_tui_ao/train.txt" # 818
     - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-8/cho_tay_vao_tui_ao/train.txt" # 198
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-sensenova--set-3/cho_tay_vao_tui_ao/train.txt" # 628
 
     - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_ao/train.txt"
     - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-1/cho_tay_vao_tui_ao/train.txt"
     - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-7/cho_tay_vao_tui_ao/train.txt"
     - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-8/cho_tay_vao_tui_ao/train.txt"
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-sensenova--set-3/cho_tay_vao_tui_ao/train.txt"
     - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_ao/train.txt"
     - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-1/cho_tay_vao_tui_ao/train.txt"
     - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-7/cho_tay_vao_tui_ao/train.txt"
     - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-8/cho_tay_vao_tui_ao/train.txt"
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-sensenova--set-3/cho_tay_vao_tui_ao/train.txt"
 
     - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-8/cho_tay_vao_tui_ao/train.txt"
     - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-8/cho_tay_vao_tui_ao/train.txt"
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-8/cho_tay_vao_tui_ao/train.txt"
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-8/cho_tay_vao_tui_ao/train.txt"
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-8/cho_tay_vao_tui_ao/train.txt"
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-sensenova--set-3/cho_tay_vao_tui_ao/train.txt"
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-sensenova--set-3/cho_tay_vao_tui_ao/train.txt"
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-sensenova--set-3/cho_tay_vao_tui_ao/train.txt"
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-sensenova--set-3/cho_tay_vao_tui_ao/train.txt"
+    - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-sensenova--set-3/cho_tay_vao_tui_ao/train.txt"
   cho_tay_vao_tui_deo_tren_nguoi:
     - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_deo_tren_nguoi/train.txt" # 185 ảnh
     - "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-1/cho_tay_vao_tui_deo_tren_nguoi/train.txt" # 1,697 ảnh
@@ -151,7 +162,7 @@ val_data:
 
 # Tham số Training
 epochs: 100
-batch_size: 128
+batch_size: 96
 lr: 1e-4
 weight_decay: 0.0005
 patience: 30
@@ -161,7 +172,7 @@ monitor_metric: "val_f1" # "val_f1", "val_acc", "val_loss", ... (Tiêu chí lưu
 monitor_mode: "max" # "max" hoặc "min" (mặc định tự động: "min" cho loss, "max" cho các chỉ số khác)
 
 accelerator: "gpu" # "cpu", "gpu"
-devices: [2] # "auto", 0, 1, ...
+devices: [0, 2] # "auto", 0, 1, ...
 
 model: "efficientnetv2s"
 

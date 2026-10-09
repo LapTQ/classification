@@ -28,9 +28,16 @@ def train_model(config_path: str) -> None:
     with open(config_path, "r", encoding="utf-8") as f:
         cfg = yaml.safe_load(f)
 
+    pretrained_path = cfg["pretrained_path"]
     resume_path = cfg["resume_path"]
     accelerator = cfg["accelerator"]
     devices = cfg["devices"]
+
+    if resume_path and pretrained_path:
+        raise ValueError(
+            "Cannot specify both 'resume_path' and 'pretrained_path' simultaneously. "
+            "Use 'resume_path' to resume training or 'pretrained_path' to start fresh from a checkpoint."
+        )
 
     # 2. Setup Run Directory & Load Actual Config (if resume)
     if resume_path:
@@ -99,6 +106,21 @@ def train_model(config_path: str) -> None:
         lr=float(cfg["lr"]),
         weight_decay=float(cfg["weight_decay"]),
     )
+
+    if pretrained_path:
+        if not os.path.exists(pretrained_path):
+            raise FileNotFoundError(f"Pretrained checkpoint not found: {pretrained_path}")
+        print(f"Loading pretrained weights from {pretrained_path}")
+        ckpt = torch.load(pretrained_path, map_location="cpu")
+        state_dict = ckpt["state_dict"] if "state_dict" in ckpt else ckpt
+        if any(k.startswith("model.") for k in state_dict):
+            msg = model.load_state_dict(state_dict, strict=False)
+        else:
+            msg = model.model.load_state_dict(state_dict, strict=False)
+        print(
+            f"Loaded pretrained weights: missing_keys={len(msg.missing_keys)}, "
+            f"unexpected_keys={len(msg.unexpected_keys)}"
+        )
 
     # 5. Callbacks & Loggers
     monitor_metric = cfg["monitor_metric"]

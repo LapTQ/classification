@@ -4,6 +4,7 @@
 output_dir: "/home/laptq/laptq-fs26-shoplifting-detection/runs/classification/fs26/v7.2dcnn.cluster-CNN-8--cut-l4.only-2"
 
 resume_path: null # Path tới thư mục run để resume (nếu có)
+pretrained_path: null # Path tới checkpoint pre-trained để finetune từ đầu (nếu có)
 
 # Thứ tự các class (Quan trọng: phải khớp với chỉ số khi lưu/load model)
 classes:

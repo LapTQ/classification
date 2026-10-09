@@ -4,6 +4,7 @@
 output_dir: "models/checkpoints/fs26/action_recognition/classification/v23.efficientv2s.for_CNN_8_classes_manually_selected+flux_set_1_2+masked_grid"
 
 resume_path: null # Path tới thư mục run để resume (nếu có)
+pretrained_path: null # Path tới checkpoint pre-trained để finetune từ đầu (nếu có)
 
 # Thứ tự các class (Quan trọng: phải khớp với chỉ số khi lưu/load model)
 classes:
