@@ -13,7 +13,11 @@ from pytorch_lightning.loggers import CSVLogger
 from src.core.model import ClassifyModel
 from src.core.data import ClassifyDataModule
 from src.core.utils import get_run_dir, visualize_batch
-from src.entrypoints.bootstrap import create_backbone, create_transform
+from src.entrypoints.bootstrap import (
+    create_backbone,
+    create_rescaler,
+    create_transform,
+)
 
 # ================= CẤU HÌNH TRỰC TIẾP =================
 CONFIG_PATH = "configs/fs26/action_recognition/v31.efficientv2s.for_CNN_8_classes_manually_selected+flux_set_1_2_3_4_5_7_8_9_10_11_12+sensenova_set_1_2.yaml"  # Path tới file cấu hình
@@ -100,11 +104,13 @@ def train_model(config_path: str) -> None:
 
     # 4. Model
     backbone = create_backbone(cfg)
+    rescaler = create_rescaler(cfg)
     model = ClassifyModel(
         model=backbone,
         num_classes=len(cfg["classes"]),
         lr=float(cfg["lr"]),
         weight_decay=float(cfg["weight_decay"]),
+        rescaler=rescaler,
     )
 
     if pretrained_path:

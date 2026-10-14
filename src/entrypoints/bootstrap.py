@@ -1,7 +1,6 @@
-from typing import Optional
-
 import torchvision.transforms as T
 from torch import nn
+from src.core.rescaler import IBatchRescaler
 
 
 def create_backbone(cfg: dict) -> nn.Module:
@@ -25,6 +24,13 @@ def create_backbone(cfg: dict) -> nn.Module:
         from src.backbone.vit_b_16 import get_vit_b_16
 
         backbone = get_vit_b_16(num_classes=num_classes)
+    elif model_name == "dinov3_vits16":
+        from src.backbone.dinov3_vits16 import get_dinov3_vits16
+
+        backbone = get_dinov3_vits16(
+            num_classes=num_classes,
+            pretrained_weights=cfg["dinov3_pretrain_weights"],
+        )
     else:
         raise ValueError(f"Model {model_name} not found")
 
@@ -99,3 +105,30 @@ def create_transform(aug_list: list) -> T.Compose:
             raise ValueError(f"Unknown augmentation {name}")
 
     return T.Compose(transforms)
+
+
+def create_rescaler(cfg: dict) -> IBatchRescaler | None:
+    if "multiscale" not in cfg or cfg["multiscale"] is None:
+        return None
+
+    ms_cfg: dict = cfg["multiscale"]
+    rescaler_type: str = ms_cfg["type"]
+
+    if rescaler_type == "random":
+        from src.core.rescaler import RandomBatchRescaler
+        
+        return RandomBatchRescaler(
+            sizes=ms_cfg["sizes"],
+            step_interval=ms_cfg["step_interval"],
+        )
+    elif rescaler_type == "progressive":
+        from src.core.rescaler import ProgressiveBatchRescaler
+
+        return ProgressiveBatchRescaler(
+            milestones=ms_cfg["milestones"],
+            step_interval=ms_cfg["step_interval"],
+        )
+    else:
+        raise ValueError(f"Unknown rescaler type: {rescaler_type}")
+
+

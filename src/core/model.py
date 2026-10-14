@@ -1,5 +1,5 @@
 import os
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Tuple
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -11,6 +11,7 @@ import torch.nn.functional as F
 import torchmetrics
 from torchmetrics.classification import MulticlassConfusionMatrix
 from torchvision import models
+from src.core.rescaler import IBatchRescaler
 
 
 class ClassifyModel(pl.LightningModule):
@@ -20,11 +21,13 @@ class ClassifyModel(pl.LightningModule):
         num_classes: int,
         lr: float = 1e-4,
         weight_decay: float = 1e-5,
-        class_names: Optional[List[str]] = None,
+        class_names: list[str] | None = None,
+        rescaler: IBatchRescaler | None = None,
     ) -> None:
         super().__init__()
-        self.save_hyperparameters(ignore=["model"])
+        self.save_hyperparameters(ignore=["model", "rescaler"])
         self.model = model
+        self.rescaler = rescaler
 
         self.loss_fn = nn.CrossEntropyLoss()
 
@@ -54,7 +57,12 @@ class ClassifyModel(pl.LightningModule):
         self, batch: Tuple[torch.Tensor, torch.Tensor, List[str]], batch_idx: int
     ) -> torch.Tensor:
         x, y, _ = batch
+        if self.rescaler is not None:
+            x = self.rescaler(
+                x, current_epoch=self.current_epoch, global_step=self.global_step
+            )
         logits = self(x)
+
         loss = self.loss_fn(logits, y)
 
         acc = self.train_acc(logits, y)
