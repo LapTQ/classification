@@ -10,21 +10,22 @@ from src.core.model import ClassifyModel
 from src.entrypoints.bootstrap import create_backbone, create_transform
 
 # ================= CẤU HÌNH TRỰC TIẾP =================
-CKPT_PATH = "models/checkpoints/fs26/action_recognition/classification/v31.efficientv2s.for_CNN_8_classes_manually_selected+flux_set_1_2_3_4_5_7_8_9+sensenova_set_1_3/weights/best-epoch=31-val_f1=0.566.ckpt"
+CKPT_PATH = "models/checkpoints/fs26/action_recognition/classification/v38.dinov3_vits16.for_CNN_8_classes_manually_selected+flux_set_1_2_3_4_5_7_8_9_10_11_12+sensenova_set_1_2+gemini_set_1.multiscale/weights/best-epoch=09-val_f1=0.610.ckpt"
 INPUT_PATHS = [
     # "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_cam_tren_tay/train.txt",
 
     # "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_quan/val.easy.txt",
     # "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_ao/val.easy.txt",
-    "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_deo_tren_nguoi/val.easy.txt",
+    "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_ao/val.medium.txt",
+    # "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_deo_tren_nguoi/val.easy.txt",
     # "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.manually_selected/cho_tay_vao_tui_cam_tren_tay/val.easy.txt",
 
     # "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-1/cho_tay_vao_tui_cam_tren_tay/train.txt"
     # "data/processed/fs26/action_recognition/classification/action.for_CNN.8_classes.gen-flux--set-7/cho_tay_vao_tui_ao/train.txt"
 ]  # Path tới file ảnh, file .txt hoặc thư mục
-DEVICE = "cuda:3"
-BATCH_SIZE = 32
-OUTPUT_DIR = "data/tmp/predict_2dcnn_action_saliency/v31_2"
+DEVICE = "cuda:0"
+BATCH_SIZE = 128
+OUTPUT_DIR = "data/tmp/predict_2dcnn_action_saliency/v38"
 # =====================================================
 
 
@@ -74,7 +75,9 @@ def predict_saliency(
     std_t = torch.tensor(std_val, device=device).view(1, 3, 1, 1)
 
     backbone = create_backbone(cfg)
-    model = ClassifyModel.load_from_checkpoint(ckpt_path, model=backbone).to(device)
+    model = ClassifyModel.load_from_checkpoint(
+        ckpt_path, model=backbone, map_location="cpu"
+    ).to(device)
     model.eval()
 
     # Enable gradients for the model

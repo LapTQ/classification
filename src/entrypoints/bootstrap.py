@@ -108,7 +108,7 @@ def create_transform(aug_list: list) -> T.Compose:
 
 
 def create_rescaler(cfg: dict) -> IBatchRescaler | None:
-    if "multiscale" not in cfg or cfg["multiscale"] is None:
+    if cfg["multiscale"] is None:
         return None
 
     ms_cfg: dict = cfg["multiscale"]

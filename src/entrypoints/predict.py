@@ -36,7 +36,9 @@ def predict_model(ckpt_path: str, input_paths: List[str], output_path: str, devi
 
     classes = cfg["classes"]
     backbone = create_backbone(cfg)
-    model = ClassifyModel.load_from_checkpoint(ckpt_path, model=backbone).to(device)
+    model = ClassifyModel.load_from_checkpoint(
+        ckpt_path, model=backbone, map_location="cpu"
+    ).to(device)
     model.eval()
 
     # 3. Transform

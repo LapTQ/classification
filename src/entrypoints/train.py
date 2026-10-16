@@ -20,7 +20,7 @@ from src.entrypoints.bootstrap import (
 )
 
 # ================= CẤU HÌNH TRỰC TIẾP =================
-CONFIG_PATH = "configs/fs26/action_recognition/v31.efficientv2s.for_CNN_8_classes_manually_selected+flux_set_1_2_3_4_5_7_8_9_10_11_12+sensenova_set_1_2.yaml"  # Path tới file cấu hình
+CONFIG_PATH = "configs/fs26/action_recognition/v36.efficientv2s.for_CNN_8_classes_manually_selected+flux_set_1_2_3_4_5_7_8_9_10_11_12+sensenova_set_1_2+gemini_set_1.yaml"  # Path tới file cấu hình
 # =====================================================
 
 
@@ -140,17 +140,25 @@ def train_model(config_path: str) -> None:
         save_last=True,
     )
 
+    epoch_checkpoint_callback = ModelCheckpoint(
+        dirpath=os.path.join(run_dir, "weights"),
+        filename=f"{{epoch:02d}}-{{{monitor_metric}:.3f}}",
+        save_top_k=-1,
+        every_n_epochs=1,
+    )
+
     loggers = [
         CSVLogger(run_dir, name="logs"),
     ]
 
-    # 5. Trainer
+    # 6. Trainer
     trainer = pl.Trainer(
         max_epochs=cfg["epochs"],
         accelerator=accelerator,
         devices=devices,
         callbacks=[
             checkpoint_callback,
+            # epoch_checkpoint_callback,
             EarlyStopping(
                 monitor=monitor_metric,
                 mode=monitor_mode,

@@ -60,7 +60,9 @@ def predict_gradcam(
     std_t = torch.tensor(std_val, device=device).view(1, 3, 1, 1)
 
     backbone = create_backbone(cfg)
-    model = ClassifyModel.load_from_checkpoint(ckpt_path, model=backbone).to(device)
+    model = ClassifyModel.load_from_checkpoint(
+        ckpt_path, model=backbone, map_location="cpu"
+    ).to(device)
     model.eval()
 
     # Enable gradients for Grad-CAM

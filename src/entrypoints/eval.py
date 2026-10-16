@@ -8,7 +8,7 @@ from src.core.data import ClassifyDataModule
 from src.entrypoints.bootstrap import create_backbone, create_transform
 
 # ================= CẤU HÌNH TRỰC TIẾP =================
-CKPT_PATH = "models/checkpoints/fs26/action_recognition/classification/v31.efficientv2s.for_CNN_8_classes_manually_selected+flux_set_1_2_3_4_5_7_8_9_10_11_12+sensenova_set_1_2_1/weights/best-epoch=11-val_f1=0.525.ckpt"
+CKPT_PATH = "models/checkpoints/fs26/action_recognition/classification/v36.efficientv2s.for_CNN_8_classes_manually_selected+flux_set_1_2_3_4_5_7_8_9_10_11_12+sensenova_set_1_2+gemini_set_1/weights/best-epoch=14-val_f1=0.548.ckpt"
 # =====================================================
 
 
@@ -40,7 +40,9 @@ def evaluate_model(ckpt_path: str) -> None:
 
     # 3. Load Model
     backbone = create_backbone(cfg)
-    model = ClassifyModel.load_from_checkpoint(ckpt_path, model=backbone)
+    model = ClassifyModel.load_from_checkpoint(
+        ckpt_path, model=backbone, map_location="cpu"
+    )
     model.class_names = cfg["classes"]
 
     # 4. Trainer
