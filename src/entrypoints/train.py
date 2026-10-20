@@ -20,7 +20,7 @@ from src.entrypoints.bootstrap import (
 )
 
 # ================= CẤU HÌNH TRỰC TIẾP =================
-CONFIG_PATH = "configs/fs26/action_recognition/v36.efficientv2s.for_CNN_8_classes_manually_selected+flux_set_1_2_3_4_5_7_8_9_10_11_12+sensenova_set_1_2+gemini_set_1.yaml"  # Path tới file cấu hình
+CONFIG_PATH = "configs/fs26/action_recognition/v39.v37+merge_class_2_3.yaml"  # Path tới file cấu hình
 # =====================================================
 
 

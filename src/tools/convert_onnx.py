@@ -15,8 +15,8 @@ from src.core.model import ClassifyModel
 from src.entrypoints.bootstrap import create_backbone
 
 # ================= CẤU HÌNH TRỰC TIẾP =================
-CKPT_PATH: str = "models/checkpoints/fs26/action_recognition/classification/v31.efficientv2s.for_CNN_8_classes_manually_selected+flux_set_1_2_3_4_5_7_8_9_10_11_12+sensenova_set_1_2/weights/best-epoch=31-val_f1=0.566.ckpt"
-OUTPUT_PATH: str = "models/checkpoints/fs26/action_recognition/classification/v31.efficientv2s.for_CNN_8_classes_manually_selected+flux_set_1_2_3_4_5_7_8_9_10_11_12+sensenova_set_1_2/weights/best-epoch=31-val_f1=0.566.ckpt.onnx"
+CKPT_PATH: str = "models/checkpoints/fs26/action_recognition/classification/v39.v37+merge_class_2_3/weights/best-epoch=23-val_f1=0.661.ckpt"
+OUTPUT_PATH: str = "models/checkpoints/fs26/action_recognition/classification/v39.v37+merge_class_2_3/weights/best-epoch=23-val_f1=0.661.ckpt.onnx"
 DUMMY_INPUT: torch.Tensor = torch.randn(1, 3, 224, 224)
 INPUT_NAMES: List[str] = ["input"]
 OUTPUT_NAMES: List[str] = ["output"]
